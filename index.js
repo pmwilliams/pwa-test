@@ -5,11 +5,12 @@ window.onload = () => {
     navigator.serviceWorker.register('worker.js');
   }
 
-  if(window.Notification && Notification.permission !== "denied") {
-    Notification.requestPermission(function(status) {
-      var notification = new Notification(
-        'PWA Test', 
-        { body: 'This is your PWA notification' }); 
-    });
-  }
+  Notification.requestPermission(result => {
+    if (result === 'granted') {
+      navigator.serviceWorker.ready.then(registration => registration.showNotification(
+          'PWA Test', 
+          { body: 'This is your PWA notification from service worker' }
+      ));
+    }
+  });
 }
