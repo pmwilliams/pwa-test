@@ -1,8 +1,7 @@
 var cacheName = 'pwa-test';
 var filesToCache = [
-  '/',
-  '/index.html',
-  '/style.css'
+  'index.html',
+  'style.css'
 ];
 
 self.addEventListener('install', function(e) {
