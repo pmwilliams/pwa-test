@@ -15,10 +15,78 @@
     <meta name="apple-mobile-web-app-title" content="PWA Test"> 
     <meta name="msapplication-TileImage" content="images/icon-144.png">  
     <meta name="msapplication-TileColor" content="#FFFFFF">
+
+    <link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   </head>
-  <body>
-    <h1>PWA Test</h1>
-    <p>Hello world!</p>
+  <body class="mdc-typography">
+    <header class="mdc-top-app-bar app-bar" id="app-bar">
+      <div class="mdc-top-app-bar__row">
+        <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
+          <button class="material-icons mdc-top-app-bar__navigation-icon mdc-icon-button">menu</button>
+          <span class="mdc-top-app-bar__title">PWA Test</span>
+        </section>
+      </div>
+    </header>
+    <div class="mdc-top-app-bar--fixed-adjust">
+      <aside class="mdc-drawer">
+        <div class="mdc-drawer__content">
+          <nav class="mdc-list">
+            <a class="mdc-list-item mdc-list-item--activated" href="#" aria-current="page" tabindex="0">
+              <span class="mdc-list-item__ripple"></span>
+              <i class="material-icons mdc-list-item__graphic" aria-hidden="true">notifications</i>
+              <span class="mdc-list-item__text">Notifications</span>
+            </a>
+            <a class="mdc-list-item" href="#contacts">
+              <span class="mdc-list-item__ripple"></span>
+              <i class="material-icons mdc-list-item__graphic" aria-hidden="true">contacts</i>
+              <span class="mdc-list-item__text">Contacts</span>
+            </a>
+            <a class="mdc-list-item" href="#share">
+              <span class="mdc-list-item__ripple"></span>
+              <i class="material-icons mdc-list-item__graphic" aria-hidden="true">share</i>
+              <span class="mdc-list-item__text">Share</span>
+            </a>
+          </nav>
+        </div>
+      </aside>
+      <div class="mdc-drawer-scrim"></div>
+    </div>
+    <main class="main-content mdc-top-app-bar--fixed-adjust">
+      <div class="page show-page" id="notifications-page">
+        <h2 class="mdc-typography--heading2">Create Notification</h2>
+        <label class="mdc-text-field mdc-text-field--filled" id="notification-title">
+          <span class="mdc-text-field__ripple"></span>
+          <span class="mdc-floating-label" id="notification-title-label">Title</span>
+          <input class="mdc-text-field__input" type="text" value="Hi there!" aria-labelledby="notification-title-label">
+          <span class="mdc-line-ripple"></span>
+        </label>
+        <br/>
+        <label class="mdc-text-field mdc-text-field--filled" id="notification-content">
+          <span class="mdc-text-field__ripple"></span>
+          <span class="mdc-floating-label" id="notification-content-label">Content</span>
+          <input class="mdc-text-field__input" type="text" value="This is a notification" aria-labelledby="notification-content-label">
+          <span class="mdc-line-ripple"></span>
+        </label>
+        <br/>
+        <br/>
+        <button class="mdc-button mdc-button--raised mdc-button--leading" id="notify-button">
+          <span class="mdc-button__ripple"></span>
+          <i class="material-icons mdc-button__icon" aria-hidden="true"
+            >notifications_active</i
+          >
+          <span class="mdc-button__label">Notify</span>
+        </button>
+      </div>
+      <div class="page" id="contacts-page">
+        <h2 class="mdc-typography--heading2">Contacts</h2>
+      </div>
+      <div class="page" id="share-page">
+        <h2 class="mdc-typography--heading2">Share</h2>
+      </div>
+    </main>
   </body>
-  <script src="index.js"></script>
+  <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+  <script src="index.js" type="module"></script>
+  <script src="app/app.js" type="module"></script>
 </html> 
