@@ -9,6 +9,10 @@ main {
   padding: 24px;
 }
 
+application-shell {
+  display: flex;
+}
+
 .page {
   display: none;
 }

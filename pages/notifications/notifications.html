@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>PWA Test | Notifications</title>
+    <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+    <script src="../../common/init-sub-page.js" type="module"></script>
+    <script src="notifications.js" type="module"></script>
+  </head>
+  <body class="mdc-typography">
+    <application-shell>
+      <div>
+        <h2 class="mdc-typography--heading2">Create Notification</h2>
+        <label class="mdc-text-field mdc-text-field--filled" id="notification-title">
+          <span class="mdc-text-field__ripple"></span>
+          <span class="mdc-floating-label" id="notification-title-label">Title</span>
+          <input class="mdc-text-field__input" type="text" value="Hi there!" aria-labelledby="notification-title-label">
+          <span class="mdc-line-ripple"></span>
+        </label>
+        <br/>
+        <label class="mdc-text-field mdc-text-field--filled" id="notification-content">
+          <span class="mdc-text-field__ripple"></span>
+          <span class="mdc-floating-label" id="notification-content-label">Content</span>
+          <input class="mdc-text-field__input" type="text" value="This is a notification" aria-labelledby="notification-content-label">
+          <span class="mdc-line-ripple"></span>
+        </label>
+        <br/>
+        <br/>
+        <button class="mdc-button mdc-button--raised mdc-button--leading" id="notify-button">
+          <span class="mdc-button__ripple"></span>
+          <i class="material-icons mdc-button__icon" aria-hidden="true"
+            >notifications_active</i
+          >
+          <span class="mdc-button__label">Notify</span>
+        </button>
+      </div>
+    </application-shell>
+  </body>
+</html> 
