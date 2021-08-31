@@ -10,7 +10,7 @@ export const initPage = relativePath => {
 export const registerServiceWorker = (relativePath) => {
   window.onload = () => {
     if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register(`${relativePath}worker.js`, { scope: '/' });
+      navigator.serviceWorker.register(`${relativePath}worker.js`);
     }
   }
 }
