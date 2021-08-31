@@ -15,7 +15,7 @@ export const initialiseApplicationShell = (relativePath) => {
       <aside class="mdc-drawer">
         <div class="mdc-drawer__content">
           <nav class="mdc-list">
-            <a class="mdc-list-item mdc-list-item--activated" href="${relativePath}/index.html" aria-current="page" tabindex="0">
+            <a class="mdc-list-item mdc-list-item--activated" href="${relativePath}index.html" aria-current="page" tabindex="0">
               <span class="mdc-list-item__ripple"></span>
               <i class="material-icons mdc-list-item__graphic" aria-hidden="true">home</i>
               <span class="mdc-list-item__text">Home</span>
