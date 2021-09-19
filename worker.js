@@ -13,7 +13,8 @@ var filesToCache = [
   'pages/notifications/notifications.html',
   'pages/notifications/notifications.js',
   'pages/notifications/notifications.css',
-  'pages/share/share.html'
+  'pages/share/share.html',
+  'https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js'
 ];
 
 self.addEventListener('install', function(e) {

@@ -10,12 +10,12 @@ application-shell {
   display: flex;
 }
 
-application-shell .content {
-  display: none;
+.content {
+  visibility: hidden;
 }
 
 application-shell .content.slotted {
-  display: block;
+  visibility: visible !important;
 }
 
 main {
