@@ -17,6 +17,9 @@ export const registerServiceWorker = (relativePath) => {
 
 export const addElementsToHead = (relativePath) => {
   document.head.innerHTML += `
+    <!-- global styles -->
+    <link rel="stylesheet" href="${relativePath}style.css">
+    
     <!-- material -->
     <link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -32,8 +35,5 @@ export const addElementsToHead = (relativePath) => {
     <meta name="apple-mobile-web-app-title" content="PWA Test"> 
     <meta name="msapplication-TileImage" content="${relativePath}images/icon-144.png">  
     <meta name="msapplication-TileColor" content="#FFFFFF">
-    
-    <!-- global styles -->
-    <link rel="stylesheet" href="${relativePath}style.css">
   `;
 }

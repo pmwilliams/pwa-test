@@ -2,15 +2,22 @@
 <html lang="en">
   <head>
     <meta charset="utf-8"/>
-    <title>PWA Test | Contacts</title>
     <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
     <script src="../../common/init-sub-page.js" type="module"></script>
+    <script src="contacts.js" type="module"></script>
   </head>
   <body class="mdc-typography">
-    <application-shell>
-      <div>
+    <application-shell page-title="Contacts">
+      <div class="content">
         <h2 class="mdc-typography--heading2">Contacts</h2>
-      </div>
+        <div>
+          <button class="mdc-button mdc-button--raised mdc-button--leading" id="select-contact-button">
+            <span class="mdc-button__ripple"></span>
+            <i class="material-icons mdc-button__icon" aria-hidden="true">contacts</i>
+            <span class="mdc-button__label">Select contact</span>
+          </button>
+        </div>
+      </div>            
     </application-shell>
   </body>
 </html> 
