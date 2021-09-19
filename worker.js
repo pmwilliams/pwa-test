@@ -38,7 +38,7 @@ self.addEventListener('fetch', function(e) {
 });
 
 self.addEventListener('notificationclick', (event) => {
-  clients.matchAll( { includeUncontrolled: true } ).then(r => {
+  event.waitUntil(clients.matchAll( { includeUncontrolled: true } ).then(r => {
     r.forEach(client => client.postMessage({ 
       type: 'notificationclick',
       action: event.action,
@@ -47,15 +47,15 @@ self.addEventListener('notificationclick', (event) => {
     if (event.action === 'dismiss') {
       event.notification.close();
     }
-  })
+  }));
 });
 
 self.addEventListener('notificationclose', (event) => { 
-  clients.matchAll( { includeUncontrolled: true } ).then(r => {
+  event.waitUntil(clients.matchAll( { includeUncontrolled: true } ).then(r => {
     r.forEach(client => client.postMessage({ 
       type: 'notificationclose',
       action: event.action,
       timestamp: event.notification.timestamp
     }));
-  })
+  }));
 });
