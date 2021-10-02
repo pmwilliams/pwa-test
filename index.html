@@ -3,16 +3,59 @@
   <head>
     <meta charset="utf-8"/>
     <title>PWA Test</title>
+    <link rel="stylesheet" href="pages/home/index.css">
     <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
     <script src="common/init-index-page.js" type="module"></script>
+    <script src="pages/home/index.js" type="module"></script>
   </head>
   <body class="mdc-typography">
     <application-shell>
       <div class="content" style="visibility: hidden">
-        <h2 class="mdc-typography--heading2">Overview</h2>
-        <body1>
-          A demonstration of various Web APIs implemented as a progressive web application.
-        </body1>
+        <div class="tag-line">
+          <h3>
+            
+          </h3>
+        </div>
+        <div id="overview">
+          <div id="overview-explore" class="overview-item">
+            <i class="material-icons">explore</i>
+            <h2>Explore</h2>
+            <span class="mdc-typography--body">
+              Experiment with web APIs in a safe environment.
+            </span>
+          </div>
+          <div id="overview-inspect" class="overview-item">
+            <i class="material-icons">search</i>
+            <h2>Inspect</h2>
+            <span class="mdc-typography--body">
+              See which APIs are supported by your browser.
+            </span>
+          </div>
+          <div id="overview-install" class="overview-item">
+            <i class="material-icons">download</i>
+            <h2>Install</h2>
+            <span class="mdc-typography--body">
+              Add to your home screen or install to your desktop.
+            </span>
+          </div>
+        </div>
+        <div class="overview-navigation">
+          <ul>
+            <li>
+              <a href="#overview-explore">Explore</a>
+            </li>
+            <li>
+              <a href="#overview-inspect">Inspect</a>
+            </li>
+            <li>
+              <a href="#overview-install">Install</a>
+            </li>
+          </ul>
+        </div>
+        <button id="get-started" class="mdc-button mdc-button--raised mdc-button--leading" data-mdc-auto-init="MDCRipple">
+          <span class="mdc-button__ripple"></span>
+          <span class="mdc-button__label">Get started</span>
+        </button>
       </div>
     </application-shell>
   </body>

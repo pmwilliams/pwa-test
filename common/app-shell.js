@@ -16,6 +16,8 @@ export const initialiseApplicationShell = (relativePath) => {
         <i class="material-icons mdc-list-item__graphic ${iconClass}" aria-hidden="true">${icon}</i>
       </span>`
   }
+
+  const title = "Web API Explorer"
   
   const html = `
     <link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet">
@@ -25,7 +27,7 @@ export const initialiseApplicationShell = (relativePath) => {
       <div class="mdc-top-app-bar__row">
         <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
           <button class="material-icons mdc-top-app-bar__navigation-icon mdc-icon-button">menu</button>
-          <span class="mdc-top-app-bar__title">PWA Test</span>
+          <span class="mdc-top-app-bar__title">${title}</span>
         </section>
         <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end">
           <div class="mdc-menu-surface--anchor">
@@ -100,7 +102,6 @@ export const initialiseApplicationShell = (relativePath) => {
             <slot><p>No page content<p></slot>
           </div>
           <aside class="browser-support">
-            <h4>Browser support</h4>
             <ul id="browser-support-list" class="mdc-list">
           </aside>
         </div>
@@ -151,6 +152,10 @@ export const initialiseApplicationShell = (relativePath) => {
       this.showNextAlert();
     }
 
+    showMenu() {
+      this.drawer.open = true;
+    }
+
     connectedCallback() {
       this.initCustomElement();
       this.initNav();
@@ -160,11 +165,11 @@ export const initialiseApplicationShell = (relativePath) => {
       this.initSnackBar();
       this.showContent();
 
-      const title = this.getAttribute('page-title');
-      if (title) {
-        document.title = `PWA Test | ${title}`;
+      const pageTitle = this.getAttribute('page-title');
+      if (pageTitle) {
+        document.title = `${title} | ${pageTitle}`;
       } else {
-        document.title = 'PWA Test';
+        document.title = title;
       }
     }
 
@@ -219,16 +224,16 @@ export const initialiseApplicationShell = (relativePath) => {
     }
 
     initDrawer() {
-      let drawer = window.matchMedia("(max-width: 1200px)").matches ?
+      this.drawer = window.matchMedia("(max-width: 1200px)").matches ?
           this.initModalDrawer() : this.initPermanentDrawer();
       
       const resizeHandler = () => { 
-        if (window.matchMedia("(max-width: 1200px)").matches && drawer instanceof window.mdc.list.MDCList) {
-          drawer.destroy();
-          drawer = this.initModalDrawer();
-        } else if (window.matchMedia("(min-width: 1200px)").matches && drawer instanceof window.mdc.drawer.MDCDrawer) {
-          drawer.destroy();
-          drawer = this.initPermanentDrawer();
+        if (window.matchMedia("(max-width: 1200px)").matches && this.drawer instanceof window.mdc.list.MDCList) {
+          this.drawer.destroy();
+          this.drawer = this.initModalDrawer();
+        } else if (window.matchMedia("(min-width: 1200px)").matches && this.drawer instanceof window.mdc.drawer.MDCDrawer) {
+          this.drawer.destroy();
+          this.drawer = this.initPermanentDrawer();
         }
       }
       

@@ -2,6 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8"/>
+    <link rel="stylesheet" href="contacts.css">
     <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
     <script src="../../common/init-sub-page.js" type="module"></script>
     <script src="contacts.js" type="module"></script>
@@ -9,13 +10,14 @@
   <body class="mdc-typography">
     <application-shell page-title="Contacts">
       <div class="content" style="visibility: hidden">
-        <h2 class="mdc-typography--heading2">Contacts</h2>
-        <div>
-          <button class="mdc-button mdc-button--raised mdc-button--leading" id="select-contact-button">
-            <span class="mdc-button__ripple"></span>
-            <i class="material-icons mdc-button__icon" aria-hidden="true">contacts</i>
-            <span class="mdc-button__label">Select contact</span>
-          </button>
+        <div id="contacts">
+          <div class="no-contacts">
+            <i class="material-icons">
+              contacts
+            </i>
+            <h3>Nothing to see</h3>
+            <div class="tagline mdc-typography--body">Contact picker demo coming soon.</div>
+          </div>
         </div>
       </div>            
     </application-shell>

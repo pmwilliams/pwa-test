@@ -2,6 +2,8 @@ import {
   registerAndInit
 } from '../../common/mdc.js';
 
+const MAX_VISIBLE_NOTIFICATIONS = 20;
+
 window.addEventListener('load', () => {
   registerAndInit();
   navigator.serviceWorker.ready.then(registration => {
@@ -48,11 +50,17 @@ const onNotificationClose = (type, timestamp) => {
   app.alert(`${type} notification closed.`)
 };
 
+const onNotificationError = (title, options, error) => {
+  const timestamp = new Date().getTime();
+  notifications[timestamp] = { title, timestamp, error, ...options };
+  app.alert('An exception was thrown. Check notification list for details.');
+}
+
 const mergeNotifications = (toMerge) => {
   toMerge.forEach(notification => notifications[notification.timestamp] = notification);
   const toMergeMap = Object.fromEntries(toMerge.map(notification => [notification.timestamp, notification]));
   Object.values(notifications)
-    .filter(notification => !notification.isLocal)
+    .filter(notification => !notification.isLocal && !notification.error)
     .forEach(notification => notification.isClosed = Boolean(!toMergeMap[notification.timestamp]));
   redrawNotifications();
 }
@@ -60,6 +68,7 @@ const mergeNotifications = (toMerge) => {
 const redrawNotifications = () => {
   const list = document.querySelector('#notifications ul');
   Object.values(notifications)
+    .slice(0, MAX_VISIBLE_NOTIFICATIONS)
     .sort((a, b) => a.timestamp - b.timestamp)
     .forEach(notification => {
       const existingItem = document.querySelector(`li[data-timestamp="${notification.timestamp}"]`)
@@ -87,9 +96,15 @@ const redrawNotifications = () => {
         });
         clone.querySelector('.notification-title').textContent = notification.title;
         clone.querySelector('.notification-body').textContent = notification.body;
+        clone.querySelector('.notification-source').textContent = notification.isLocal ? 'Local' : 'Service Worker';
+        clone.querySelector('.notification-time').textContent = displayTime(notification.timestamp);
         if (notification.isClosed) {
           clone.querySelector('.notification-status').classList.add('closed');
-          existingItem.querySelector('.notification-status').textContent = "notifications_off"
+          clone.querySelector('.notification-status').textContent = "notifications_off"
+        }
+        if (notification.error) {
+          clone.querySelector('.notification-status').classList.add('error');
+          clone.querySelector('.notification-status').textContent = "priority_high"
         }
         if (!notification.icon) {
           clone.querySelector('.notification-details .notification-icon').classList.add('hide');
@@ -126,17 +141,24 @@ const redrawNotifications = () => {
         if (notification.action) {
           clone.querySelector(`.notification-details .notification-action-${notification.action}`).classList.add('selected');
         }
+        if (notification.error) {
+          clone.querySelector('.notification-details .error-section').textContent = notification.error;
+        }
         list.insertBefore(clone, list.firstChild);
       }
     })
   const items = list.querySelectorAll('li');
-  if (items.length > 20) {
-    [...items].slice(20).forEach(child => child.remove());
+  if (items.length > MAX_VISIBLE_NOTIFICATIONS) {
+    [...items].slice(MAX_VISIBLE_NOTIFICATIONS).forEach(child => child.remove());
   }
 }
 
-const addNotification = () => {
+const showCreateNotification = () => {
   document.querySelector('.content').classList.add('create-notification');
+}
+
+const hideCreateNotification = () => {
+  document.querySelector('.content').classList.remove('create-notification');
 }
 
 const notify = () => {
@@ -169,22 +191,30 @@ const notify = () => {
         actions: selectedActions
       };
       if (newNotificationRadio.checked) {
-        const notification = new Notification(title, options);
-        notification.onclick = (event) => onNotificationClick('Local', event.data?.action, event.data?.notification.timestamp);
-        notification.onshow = () => onNotificationShow('Local');
-        notification.onclose = (event) => onNotificationClose('Local', event.target.timestamp);
-        notification.isLocal = true;
-        notifications[notification.timestamp] = notification;
+        try {
+          const notification = new Notification(title, options);
+          notification.onclick = (event) => onNotificationClick('Local', event.data?.action, event.data?.notification.timestamp);
+          notification.onshow = () => onNotificationShow('Local');
+          notification.onclose = (event) => onNotificationClose('Local', event.target.timestamp);
+          notification.isLocal = true;
+          notifications[notification.timestamp] = notification;
+        } catch (error) {
+          onNotificationError(title, options, error)
+        }
         redrawNotifications();
       } else {
-        navigator.serviceWorker.ready.then(registration => {
-          registration.showNotification(title, options);
-          setTimeout(() => registration.getNotifications().then(mergeNotifications), 200);
-        });
+        navigator.serviceWorker.ready
+          .then(registration => {
+            registration.showNotification(title, options)
+              .catch(error => onNotificationError(title, options, error));
+            setTimeout(() => registration.getNotifications()
+              .then(mergeNotifications), 200);
+          });
       }
     }
   });
   document.querySelector('.content').classList.remove('create-notification');
+  document.querySelector('#notifications').scrollIntoView({ behavior: 'smooth' })
 }
 
 navigator.serviceWorker.addEventListener('message', event => {
@@ -199,6 +229,8 @@ navigator.serviceWorker.addEventListener('message', event => {
       // Ignore anything else from service worker
   }
 });
+
+const displayTime = time => new Date(time).toLocaleString('en-UK');
 
 const isNotificationSupported = () => Boolean(window.Notification);
 const isActionsSupported = () => Notification.prototype.hasOwnProperty('actions');
@@ -270,5 +302,6 @@ const getApi = () => ([
 ]);
 
 document.querySelector('#notify-button').addEventListener('click', () => notify());
-document.querySelector('#add-notification-fab').addEventListener('click', () => addNotification());
+document.querySelector('#create-notification-fab').addEventListener('click', () => showCreateNotification());
+document.querySelector('#close-create-notification').addEventListener('click', () => hideCreateNotification());
 app.browserSupport = getApi();

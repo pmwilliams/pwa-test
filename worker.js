@@ -10,11 +10,14 @@ var filesToCache = [
   'common/routes.js',
   'pages/contacts/contacts.html',
   'pages/contacts/contacts.js',
+  'pages/contacts/contacts.css',
   'pages/notifications/notifications.html',
   'pages/notifications/notifications.js',
   'pages/notifications/notifications.css',
   'pages/share/share.html',
-  'https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js'
+  'https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js',
+  'https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css',
+  'https://fonts.googleapis.com/icon?family=Material+Icons'
 ];
 
 self.addEventListener('install', function(e) {

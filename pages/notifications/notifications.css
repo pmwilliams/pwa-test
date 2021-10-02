@@ -2,12 +2,12 @@ h5 {
   margin-top: 0;
 }
 
-.create-notification #notifications,
-.create-notification #add-notification-fab {
+.create-notification #create-notification-fab,
+.create-notification #notifications {
   display: none;
 }
 
-#add-notification-fab {
+#create-notification-fab {
   position: fixed;
   bottom: 48px;
   right: 348px;
@@ -15,9 +15,60 @@ h5 {
 }
 
 @media (max-width: 900px) {
-  #add-notification-fab {
+  #create-notification-fab {
     right: 48px;
   }
+}
+
+#notifications {
+  position: relative;
+  width: 100%;
+}
+
+#notifications .no-notifications {
+  opacity: 0;
+  position: absolute;
+  top: 24px;
+  width: 100%;
+  transition: opacity 250ms;
+  display: flex;
+  padding-top: 12px;
+  flex-direction: column;
+  align-items: center;
+  vertical-align: middle;
+  z-index: -1;
+}
+
+#notifications ul {
+  opacity: 1;
+  transition: opacity 250ms 250ms;
+  z-index: 1;
+}
+
+#notifications ul:empty {
+  opacity: 0;
+}
+
+#notifications ul:empty ~ .no-notifications {
+  opacity: 1;
+}
+
+#notifications .no-notifications i {
+  height: 100%;
+  text-align: center;
+  color: var(--mdc-theme-primary);
+  opacity: 0.2;
+  font-size: min(calc(100vh - 400px), 300px);
+}
+
+#notifications .no-notifications h3 {
+  font-weight: normal;
+  margin: 0 0 12px;
+}
+
+#notifications .no-notifications .tagline {
+  max-width: 250px;
+  text-align: center;
 }
 
 #notifications li {
@@ -55,7 +106,6 @@ h5 {
   left: -12px;
   width: 48px;
   height: 48px;
-  transition: width 0.5s, height 0.5s, top 0.5s, left vs;
   border-radius: 50%;
   content: '';
   background-color: rgba(1, 135, 134, 0.2);
@@ -76,6 +126,17 @@ h5 {
 
 #notifications .notification-status.closed {
   color: #999999;
+}
+
+#notifications .notification-status.error {
+  color: var(--mdc-theme-error);
+  opacity: 0.7;
+}
+
+#notifications .notification-status.error:before,
+#notifications .notification-status.error:after {
+  background-color: var(--mdc-theme-error);
+  opacity: 0.1;
 }
 
 #notifications .notification-status.closed:before {
@@ -135,7 +196,6 @@ h5 {
   margin-right: 6px;
 }
 
-
 #notifications .notification-details .mdc-chip.hide {
   display: none;
 }
@@ -145,17 +205,21 @@ h5 {
   color: var(--mdc-theme-secondary);
 }
 
+#notifications .notification-details .error-section {
+  padding: 10px;
+  color: var(--mdc-theme-error);
+}
+
+#notifications .notification-details .error-section:empty {
+  display: none;
+}
+
 #create-notification {
   display: none;
-  padding: 0 24px 24px;
 }
 
 .create-notification #create-notification {
   display: block;
-}
-
-.mdc-layout-grid {
-  padding: 24px 0 !important;
 }
 
 .mdc-text-field {
@@ -202,4 +266,5 @@ h5 {
 #notify-button {
   margin: 24px 0;
   width: 100%;
+  background-color: var(--mdc-theme-secondary, #018786);
 }
