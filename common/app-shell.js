@@ -34,7 +34,7 @@ export const initialiseApplicationShell = (relativePath) => {
             <button id="menu-button" class="material-icons mdc-icon-button">more_vert</button>
             <div class="mdc-menu mdc-menu-surface">
               <ul class="mdc-list" role="menu" aria-hidden="true" aria-orientation="vertical" tabindex="-1">
-                <a class="mdc-list-item" href="https://github.com/pmwilliams/pwa-test" target="_blank">
+                <a class="mdc-list-item" href="https://github.com/pmwilliams/pwa-test" target="_blank" rel="noreferrer">
                   <li class="mdc-list-item" role="menuitem">
                     <span class="mdc-list-item__ripple"></span>
                     <span class="mdc-list-item__text">Github</span>
