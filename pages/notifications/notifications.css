@@ -159,6 +159,13 @@ h5 {
   flex: 1;
 }
 
+#notifications .notification-title,
+#notifications .notification-body {
+  max-width: 150px;
+  word-wrap: break-word;
+  text-overflow: ellipsis;
+}
+
 #notifications .notification-source {
   font-weight: normal;
   font-size: var(--mdc-typography-body2-font-size, 0.875rem);

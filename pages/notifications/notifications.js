@@ -230,7 +230,7 @@ navigator.serviceWorker.addEventListener('message', event => {
   }
 });
 
-const displayTime = time => new Date(time).toLocaleString('en-UK');
+const displayTime = time => new Date(time).toLocaleTimeString('en-UK');
 
 const isNotificationSupported = () => Boolean(window.Notification);
 const isActionsSupported = () => Notification.prototype.hasOwnProperty('actions');
