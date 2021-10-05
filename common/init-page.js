@@ -17,14 +17,6 @@ export const registerServiceWorker = (relativePath) => {
 
 export const addElementsToHead = (relativePath) => {
   document.head.innerHTML += `
-    <!-- global styles -->
-    <link rel="stylesheet" href="${relativePath}style.css">
-    
-    <!-- material -->
-    <link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    
-    <!-- pwa -->
     <link rel="manifest" href="${relativePath}manifest.json">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#fff">

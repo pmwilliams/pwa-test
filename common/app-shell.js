@@ -31,6 +31,7 @@ export const initialiseApplicationShell = (relativePath) => {
         </section>
         <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end">
           <div class="mdc-menu-surface--anchor">
+            <button id="theme-button" class="material-icons mdc-icon-button">dark_mode</button>
             <button id="menu-button" class="material-icons mdc-icon-button">more_vert</button>
             <div class="mdc-menu mdc-menu-surface">
               <ul class="mdc-list" role="menu" aria-hidden="true" aria-orientation="vertical" tabindex="-1">
@@ -163,6 +164,7 @@ export const initialiseApplicationShell = (relativePath) => {
       this.initTabs();
       this.initDrawer();
       this.initSnackBar();
+      this.initTheme();
       this.showContent();
 
       const pageTitle = this.getAttribute('page-title');
@@ -269,6 +271,34 @@ export const initialiseApplicationShell = (relativePath) => {
       });
       
       return drawer;
+    }
+
+    initTheme() {
+      const setLightTheme = () => {
+        document.body.classList.remove('dark');
+        document.querySelector('application-shell').classList.remove('dark');
+        themeButton.textContent = 'dark_mode';
+        localStorage.setItem('isDarkTheme', false);
+      }
+      const setDarkTheme = () => {
+        document.body.classList.add('dark');
+        document.querySelector('application-shell').classList.add('dark');
+        themeButton.textContent = 'light_mode';
+        localStorage.setItem('isDarkTheme', true);
+      }
+      const toggleTheme = () => {
+        const isDarkTheme = localStorage.getItem('isDarkTheme') === 'true';
+        if (isDarkTheme) {
+          setLightTheme();  
+        } else {
+          setDarkTheme();
+        }
+      }
+      const themeButton = this.shadowDom.querySelector('#theme-button');
+      this.shadowDom.querySelector('#theme-button').addEventListener('click', toggleTheme);
+      if (localStorage.getItem('isDarkTheme') === 'true') {
+        setDarkTheme();
+      }
     }
 
     showNextAlert() {

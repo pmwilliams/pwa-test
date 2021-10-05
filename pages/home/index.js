@@ -56,7 +56,7 @@ const initialiseOverviewCycle = () => {
   }
   
   navItems.forEach(item => item.addEventListener('mousedown', pauseCycle));
-  document.querySelector('#overview').addEventListener('wheel', pauseCycle);
+  document.querySelector('#overview').addEventListener('wheel', pauseCycle, {passive: true});
   document.querySelector('#overview').addEventListener('pointerdown', pauseCycle);
 
   if (window.matchMedia("(max-width: 600px)").matches) {

@@ -19,6 +19,10 @@
   font-size: min(calc(100vh - 448px), 252px);
 }
 
+.dark #contacts .no-contacts i {
+  opacity: 1.0;
+}
+
 #contacts .no-contacts h3 {
   font-weight: normal;
   margin: 24px 0 12px;

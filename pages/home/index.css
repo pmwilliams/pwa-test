@@ -34,6 +34,10 @@ h2.tag-line {
   opacity: 0.2;
 }
 
+.dark .overview-item i {
+  opacity: 1;
+}
+
 .overview-navigation {
   display: none;
   width: 100%;
