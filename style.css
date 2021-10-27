@@ -260,14 +260,40 @@ nav .mdc-list-item__text {
   background-color: rgba(255, 255, 255, 0.16);
 }
 
+.mdc-tab-bar {
+  background-color: var(--mdc-theme-primary);
+}
+
+:host(.dark) .mdc-tab-bar {
+  background-color: rgba(255,255,255,0.05);
+}
+
 .mdc-tab .mdc-tab__icon,
 .mdc-tab .mdc-tab__text-label {
-  color: var(--mdc-theme-on-surface-medium-emphasis);
+  color: rgba(255, 255, 255, 0.60);
 }
 
 .mdc-tab--active .mdc-tab__icon,
 .mdc-tab--active .mdc-tab__text-label {
+  color: var(--mdc-theme-on-primary);
+}
+
+:host(.dark) .mdc-tab .mdc-tab__icon,
+:host(.dark) .mdc-tab .mdc-tab__text-label {
+  color: var(--mdc-theme-on-surface-medium-emphasis);
+}
+
+:host(.dark) .mdc-tab--active .mdc-tab__icon,
+:host(.dark) .mdc-tab--active .mdc-tab__text-label {
   color: var(--mdc-theme-primary);
+}
+
+.mdc-tab-indicator .mdc-tab-indicator__content--underline {
+  border-color: white;
+}
+
+:host(.dark) .mdc-tab-indicator .mdc-tab-indicator__content--underline {
+  border-color: var(--mdc-theme-primary);
 }
 
 :host(.dark) .mdc-top-app-bar .mdc-top-app-bar__navigation-icon {
