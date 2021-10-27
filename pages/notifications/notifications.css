@@ -128,8 +128,16 @@ h5 {
   background-color: #e0e0e0;
 }
 
+.dark #notifications .notification-status:after {
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
 #notifications .notification-status.closed {
   color: #999999;
+}
+
+.dark #notifications .notification-status.closed {
+  color: rgba(255, 255, 255, 0.24);
 }
 
 #notifications .notification-status.error {
@@ -137,10 +145,20 @@ h5 {
   opacity: 0.7;
 }
 
+.dark #notifications .notification-status.error {
+  color: var(--mdc-theme-error);
+  opacity: 1;
+}
+
 #notifications .notification-status.error:before,
 #notifications .notification-status.error:after {
   background-color: var(--mdc-theme-error);
   opacity: 0.1;
+}
+
+.dark #notifications .notification-status.error:before,
+.dark #notifications .notification-status.error:after {
+  opacity: 0.2;
 }
 
 #notifications .notification-status.closed:before {
@@ -212,8 +230,7 @@ h5 {
 }
 
 #notifications .notification-details .mdc-chip.selected {
-  background-color: #fff;
-  color: var(--mdc-theme-secondary);
+  color: var(--mdc-theme-primary);
 }
 
 #notifications .notification-details .error-section {
@@ -242,11 +259,6 @@ h5 {
   margin-bottom: 24px;
 }
 
-.mdc-chip i {
-  color: rgba(0, 0, 0, 0.5);
-  font-size: 20px;
-}
-
 .mdc-chip-set--filter .mdc-chip i {
   width: 0;
   overflow: hidden;
@@ -258,24 +270,8 @@ h5 {
   transition: width 200ms;
 }
 
-.mdc-chip.mdc-chip--selected .mdc-chip__text {
-  color: var(--mdc-theme-secondary);
-}
-
-.mdc-chip.mdc-chip--selected i {
-  color: var(--mdc-theme-secondary);
-}
-
-.mdc-chip:focus .mdc-chip__text {
-  color: var(--mdc-theme-primary);
-}
-
-.mdc-chip:focus i {
-  color: var(--mdc-theme-primary);
-}
-
 #notify-button {
   margin: 24px 0;
   width: 100%;
-  background-color: var(--mdc-theme-secondary, #018786);
+  background-color: var(--mdc-theme-secondary);
 }
