@@ -1,7 +1,8 @@
 import { 
-  registerAndInit
-} from '../../common/mdc.js';
+  initPage
+} from '../../common/init-page.js';
 
+initPage('');
 
 const initialiseOverviewCycle = () => {
   let overviewItemIndex;
@@ -73,7 +74,6 @@ const initialiseOverviewCycle = () => {
 }
 
 window.addEventListener('load', () => {
-  registerAndInit();
   initialiseOverviewCycle();
 
   const app = document.querySelector('application-shell');

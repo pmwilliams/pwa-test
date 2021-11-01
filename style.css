@@ -25,144 +25,27 @@ body.dark {
   --mdc-checkbox-unchecked-color: var(--mdc-theme-on-surface-medium-emphasis);
 }
 
+body::-webkit-scrollbar {
+  width: 12px;               /* width of the entire scrollbar */
+}
+
+body::-webkit-scrollbar-track {
+  background: orange;        /* color of the tracking area */
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: blue;    /* color of the scroll thumb */
+  border-radius: 20px;       /* roundness of the scroll thumb */
+  border: 3px solid orange;  /* creates padding around scroll thumb */
+}
+
 application-shell {
   width: 100%;
   display: flex;
 }
 
-.content {
-  visibility: hidden;
-}
-
 application-shell .content.slotted {
   visibility: visible !important;
-}
-
-:host(.dark) .mdc-top-app-bar {
-  background-color: rgba(255,255,255,0.05);
-}
-
-:host(.dark) .mdc-drawer
-{
-  background-color: rgba(255,255,255,0.07);
-}
-
-:host(.dark) .mdc-drawer--modal
-{
-  background-color: #121212;
-}
-
-main {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-}
-
-.mdc-tab-bar {
-  display: none;
-}
-
-.content-scroller {
-  position: relative;
-  height: 100%;
-  overflow-y: auto;
-}
-
-.content-container {
-  display: flex;
-  flex: 1;
-  height: max-content;
-  min-height: 100%;
-}
-
-.content-pane {
-  flex: 2;
-  padding: 0;
-}
-
-.browser-support {
-  border-left: 1px solid rgba(0, 0, 0, 0.12);
-  width: 300px;
-  min-height: 100%;
-  display: none;
-}
-
-.show-browser-support .browser-support {
-  display: block;
-}
-
-.browser-support li {
-  display: flex;
-}
-
-.browser-support .mdc-list-item__text {
-  flex: 1;
-}
-
-.browser-support .mdc-list-item__meta i {
-  vertical-align: middle;
-  color: var(--mdc-theme-secondary);
-  opacity: 0.5;
-}
-
-.browser-support .mdc-list-item__meta i.not-supported {
-  color: var(--mdc-theme-error);
-}
-
-:host(.dark) .browser-support .mdc-list-item__meta i {
-  opacity: 1;
-}
-
-.browser-support .mdc-list-item__primary-text {
-  font-family: 'Courier New', Courier, monospace;
-  font-size: 12px;
-}
- 
-.browser-support .mdc-list-group h5 {
-  font-family: 'Courier New', Courier, monospace;
-  font-size: 14px;
-  font-weight: bold;
-  margin-bottom: 0;
-}
-
-@media (max-width: 900px) {
-  .show-browser-support .mdc-tab-bar {
-    display: block !important;
-  }
-  .content-pane,
-  .show-browser-support .browser-support {
-    display: none;
-  }
-  .content-pane.tab-selected,
-  .show-browser-support .browser-support.tab-selected {
-    display: block;
-  }
-  .browser-support {
-    border-left: none;
-    min-width: inherit;
-    width: 100%;
-    height: 100%;
-    z-index: 0;
-  }
-}
-
-.mdc-top-app-bar__navigation-icon {
-  display: none !important;
-}
-
-@media (max-width: 1200px) {
-  .mdc-top-app-bar__navigation-icon {
-    display: block !important;
-  }
-}
-
-nav .mdc-list-item {
-  height: 48px;
-  align-items: center !important;
-}
-
-nav .mdc-list-item__text {
-  padding-left: 12px;
 }
 
 .activity-heading {
@@ -173,7 +56,7 @@ nav .mdc-list-item__text {
 }
 
 .dark .activity-heading {
-  background-color: rgba(255, 255, 255, 0.16);
+  background-color: rgba(255, 255, 255, 0.05);
   color: var(--mdc-theme-on-surface);
 }
 
@@ -248,56 +131,4 @@ nav .mdc-list-item__text {
 
 .dark .mdc-radio .mdc-radio__native-control:enabled:not(:checked)+.mdc-radio__background .mdc-radio__outer-circle {
   border-color: var(--mdc-theme-on-surface-medium-emphasis);
-}
-
-:host(.dark) .mdc-menu::before {
-  content: ' ';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(255, 255, 255, 0.16);
-}
-
-.mdc-tab-bar {
-  background-color: var(--mdc-theme-primary);
-  box-shadow: 0px 0px 10px 2px #666666;
-}
-
-:host(.dark) .mdc-tab-bar {
-  background-color: rgba(255,255,255,0.05);
-  box-shadow: none;
-}
-
-.mdc-tab .mdc-tab__icon,
-.mdc-tab .mdc-tab__text-label {
-  color: rgba(255, 255, 255, 0.60);
-}
-
-.mdc-tab--active .mdc-tab__icon,
-.mdc-tab--active .mdc-tab__text-label {
-  color: var(--mdc-theme-on-primary);
-}
-
-:host(.dark) .mdc-tab .mdc-tab__icon,
-:host(.dark) .mdc-tab .mdc-tab__text-label {
-  color: var(--mdc-theme-on-surface-medium-emphasis);
-}
-
-:host(.dark) .mdc-tab--active .mdc-tab__icon,
-:host(.dark) .mdc-tab--active .mdc-tab__text-label {
-  color: var(--mdc-theme-primary);
-}
-
-.mdc-tab-indicator .mdc-tab-indicator__content--underline {
-  border-color: white;
-}
-
-:host(.dark) .mdc-tab-indicator .mdc-tab-indicator__content--underline {
-  border-color: var(--mdc-theme-primary);
-}
-
-:host(.dark) .mdc-top-app-bar .mdc-top-app-bar__navigation-icon {
-  color: var(--mdc-theme-on-background) !important;
 }

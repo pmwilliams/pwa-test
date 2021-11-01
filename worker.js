@@ -3,11 +3,9 @@ var filesToCache = [
   'index.html',
   'style.css',
   'common/app-shell.js',
-  'common/init-index-page.js',
+  'common/app-shell.css',
+  'common/app-shell.html',
   'common/init-page.js',
-  'common/init-sub-page.js',
-  'common/mdc.js',
-  'common/routes.js',
   'pages/contacts/contacts.html',
   'pages/contacts/contacts.js',
   'pages/contacts/contacts.css',
@@ -15,8 +13,8 @@ var filesToCache = [
   'pages/notifications/notifications.js',
   'pages/notifications/notifications.css',
   'pages/share/share.html',
-  'https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js',
-  'https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css',
+  'https://unpkg.com/material-components-web@13.0.0/dist/material-components-web.min.js',
+  'https://unpkg.com/material-components-web@13.0.0/dist/material-components-web.min.css',
   'https://fonts.googleapis.com/icon?family=Material+Icons'
 ];
 

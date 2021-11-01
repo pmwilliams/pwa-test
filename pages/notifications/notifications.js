@@ -1,16 +1,15 @@
 import { 
-  registerAndInit
-} from '../../common/mdc.js';
+  initPage
+} from '../../common/init-page.js';
 
 const MAX_VISIBLE_NOTIFICATIONS = 20;
 
-window.addEventListener('load', () => {
-  registerAndInit();
-  navigator.serviceWorker.ready.then(registration => {
-    registration.getNotifications().then(mergeNotifications)
-    setInterval(() => registration.getNotifications().then(mergeNotifications), 1000);
-  });
-})
+initPage('../../');
+
+navigator.serviceWorker.ready.then(registration => {
+  registration.getNotifications().then(mergeNotifications)
+  setInterval(() => registration.getNotifications().then(mergeNotifications), 1000);
+});
 
 const images = { 
   cloud: 'https://raw.githubusercontent.com/google/material-design-icons/master/png/file/cloud/materialiconsoutlined/48dp/2x/outline_cloud_black_48dp.png',
@@ -304,4 +303,5 @@ const getApi = () => ([
 document.querySelector('#notify-button').addEventListener('click', () => notify());
 document.querySelector('#create-notification-fab').addEventListener('click', () => showCreateNotification());
 document.querySelector('#close-create-notification').addEventListener('click', () => hideCreateNotification());
+
 app.browserSupport = getApi();
