@@ -234,7 +234,6 @@ export const initialiseApplicationShell = (relativePath) => {
     <link href="https://unpkg.com/material-components-web@13.0.0/dist/material-components-web.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="%relativePath%common/app-shell.css">
-    <div class="app-shell-container" style="width:100%;height:100%;display: flex;visibility: hidden;">
     <header class="mdc-top-app-bar app-bar" id="app-bar">
       <div class="mdc-top-app-bar__row">
         <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
@@ -320,7 +319,6 @@ export const initialiseApplicationShell = (relativePath) => {
         </div>
       </div>
     </main>
-    </div>
   `
   
   const template = document.createElement('template');
