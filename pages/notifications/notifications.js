@@ -4,7 +4,7 @@ import {
 
 const MAX_VISIBLE_NOTIFICATIONS = 20;
 
-initPage('../../');
+// initPage('../../');
 
 navigator.serviceWorker.ready.then(registration => {
   registration.getNotifications().then(mergeNotifications)
@@ -25,7 +25,7 @@ const actions = {
   dismiss: { action: 'dismiss', title: 'Dismiss' },
 };
 
-const app = document.querySelector('application-shell');
+const app = window.application;
 
 const onNotificationShow = (type) => app.alert(`${type} notification shown.`);
 
@@ -304,4 +304,4 @@ document.querySelector('#notify-button').addEventListener('click', () => notify(
 document.querySelector('#create-notification-fab').addEventListener('click', () => showCreateNotification());
 document.querySelector('#close-create-notification').addEventListener('click', () => hideCreateNotification());
 
-app.browserSupport = getApi();
+app.setBrowserSupport(getApi());

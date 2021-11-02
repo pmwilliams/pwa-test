@@ -1,0 +1,54 @@
+@@include('common/page-start.html', {
+  relativePath: '.',
+  style: './pages/home/index.css'
+})
+<div class="content">
+  <h2 class="tag-line">A few Web API demonstrations</h2>
+  <div id="overview">
+    <div id="overview-explore" class="overview-item">
+      <i class="material-icons">explore</i>
+      <h2>Explore</h2>
+      <span class="mdc-typography--body">
+        Experiment with APIs on different browsers and devices.
+      </span>
+    </div>
+    <div id="overview-inspect" class="overview-item">
+      <i class="material-icons">search</i>
+      <h2>Inspect</h2>
+      <span class="mdc-typography--body">
+        See which APIs are supported by your browser.
+      </span>
+    </div>
+    <div id="overview-install" class="overview-item">
+      <i class="material-icons">download</i>
+      <h2>Install</h2>
+      <span class="mdc-typography--body">
+        Add to your home screen or install to your desktop.
+      </span>
+    </div>
+  </div>
+  <div class="overview-navigation">
+    <ul>
+      <li>
+        <a href="#overview-explore">Explore</a>
+      </li>
+      <li>
+        <a href="#overview-inspect">Inspect</a>
+      </li>
+      <li>
+        <a href="#overview-install">Install</a>
+      </li>
+    </ul>
+  </div>
+  <button id="get-started" class="mdc-button mdc-button--raised mdc-button--leading" data-mdc-auto-init="MDCRipple">
+    <span class="mdc-button__ripple"></span>
+    <span class="mdc-button__label">Get started</span>
+  </button>
+  <button id="view-source" class="mdc-button mdc-button--raised mdc-button--leading" data-mdc-auto-init="MDCRipple">
+    <span class="mdc-button__ripple"></span>
+    <span class="mdc-button__label">View the source</span>
+  </button>
+</div>
+@@include('common/page-end.html', {
+  script: 'pages/home/index.js'
+})

@@ -1,6 +1,6 @@
 var cacheName = 'pwa-test';
 var filesToCache = [
-  'index.html',
+  /*'index.html',
   'style.css',
   'common/app-shell.js',
   'common/app-shell.css',
@@ -15,7 +15,7 @@ var filesToCache = [
   'pages/share/share.html',
   'https://unpkg.com/material-components-web@13.0.0/dist/material-components-web.min.js',
   'https://unpkg.com/material-components-web@13.0.0/dist/material-components-web.min.css',
-  'https://fonts.googleapis.com/icon?family=Material+Icons'
+  'https://fonts.googleapis.com/icon?family=Material+Icons'*/
 ];
 
 self.addEventListener('install', function(e) {
