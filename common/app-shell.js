@@ -65,18 +65,16 @@ class ApplicationShell extends HTMLElement {
     addStylesheet(this.shadowDom, `${relativePath}common/app-shell.css`);
     addStylesheet(this.shadowDom,"https://unpkg.com/material-components-web@13.0.0/dist/material-components-web.min.css");
     addStylesheet(this.shadowDom,"https://fonts.googleapis.com/icon?family=Material+Icons");
+    this.addElementsToHead();
     this.initCustomElement();
     this.initTheme();
     this.initTitle();
     this.initNav();      
-
-    window.addEventListener("DOMContentLoaded", () => {
-      this.initMenu();
-      this.initTabs();
-      this.initDrawer();
-      this.initSnackBar();
-      this.updateBrowserSupport();
-    })
+    this.initMenu();
+    this.initTabs();
+    this.initDrawer();
+    this.initSnackBar();
+    this.updateBrowserSupport();
 
     const pageTitle = this.getAttribute('page-title');
     if (pageTitle) {
@@ -84,6 +82,22 @@ class ApplicationShell extends HTMLElement {
     } else {
       document.title = title;
     }
+  }
+
+  addElementsToHead() {
+    const relativePath = this.getAttribute('path');
+    document.head.innerHTML += `
+      <link rel="manifest" href="${relativePath}manifest.json">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="theme-color" content="#fff">
+      <link rel="icon" href="${relativePath}favicon.ico" type="image/x-icon" />  
+      <link rel="apple-touch-icon" href="${relativePath}images/icon-152.png">  
+      <meta name="apple-mobile-web-app-capable" content="yes">  
+      <meta name="apple-mobile-web-app-status-bar-style" content="black"> 
+      <meta name="apple-mobile-web-app-title" content="PWA Test"> 
+      <meta name="msapplication-TileImage" content="${relativePath}images/icon-144.png">  
+      <meta name="msapplication-TileColor" content="#FFFFFF">
+    `;
   }
 
   addStylesheet(parent, href) {
