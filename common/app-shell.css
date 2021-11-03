@@ -129,6 +129,9 @@ main {
   .show-browser-support .browser-support.tab-selected {
     display: block;
   }
+  :host(.dark) .show-browser-support .browser-support.tab-selected {
+    background-color: unset;
+  }
   .browser-support {
     border-left: none;
     min-width: inherit;

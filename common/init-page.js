@@ -1,5 +1,3 @@
-import { initialiseApplicationShell } from './app-shell.js';
-
 export const MDCCheckbox = window.mdc.checkbox.MDCCheckbox;
 export const MDCChipSet = window.mdc.chips.MDCChipSet;
 export const MDCFormField = window.mdc.formField.MDCFormField;
@@ -33,7 +31,6 @@ const registerServiceWorker = (relativePath) => {
 const addElementsToHead = (relativePath) => {
   document.head.innerHTML += `
     <link rel="manifest" href="${relativePath}manifest.json">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#fff">
     <link rel="icon" href="${relativePath}favicon.ico" type="image/x-icon" />  
     <link rel="apple-touch-icon" href="${relativePath}images/icon-152.png">  
@@ -48,6 +45,5 @@ const addElementsToHead = (relativePath) => {
 export const initPage = relativePath => {
   registerServiceWorker(relativePath);
   addElementsToHead(relativePath);
-  initialiseApplicationShell(relativePath);
-  registerAndInit();
+  window.addEventListener("load", () => registerAndInit());
 }

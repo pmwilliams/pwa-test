@@ -1,3 +1,8 @@
+#share {
+  position: relative;
+  width: 100%;
+}
+
 #share .no-share {
   position: absolute;
   top: 48px;
