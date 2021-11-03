@@ -31,6 +31,7 @@ const registerServiceWorker = (relativePath) => {
 const addElementsToHead = (relativePath) => {
   document.head.innerHTML += `
     <link rel="manifest" href="${relativePath}manifest.json">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#fff">
     <link rel="icon" href="${relativePath}favicon.ico" type="image/x-icon" />  
     <link rel="apple-touch-icon" href="${relativePath}images/icon-152.png">  
