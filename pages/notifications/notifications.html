@@ -3,12 +3,13 @@
   
   <head>
     <meta charset="utf-8" />
-    <script src="https://unpkg.com/material-components-web@13.0.0/dist/material-components-web.min.js"></script>
-    <script src="../../common/app-shell.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://unpkg.com/material-components-web@13.0.0/dist/material-components-web.min.css">
     <link rel="stylesheet" href="../../style.css">
-    <link rel="stylesheet" href="notifications.css">
+    <link rel="stylesheet" href="notifications.css">  
+    <script src="../../common/app-shell.js"></script>
+    <script defer src="https://unpkg.com/material-components-web@13.0.0/dist/material-components-web.min.js"></script>
+    <script src="notifications.js" type="module"></script>
   </head>
 
   <template id="notification-item">
@@ -71,7 +72,7 @@
   </template>
 
   <body class="mdc-typography">
-    <application-shell path="../../" page-title="Notifications">
+    <application-shell path="../../" page-title="Notifications" browser-support>
       <div class="content">
         <button id="create-notification-fab" class="mdc-fab" aria-label="Favorite" data-mdc-auto-init="MDCRipple">
           <div class="mdc-fab__ripple"></div>
@@ -292,5 +293,4 @@
       </div>
     </application-shell>
   </body>
-  <script src="notifications.js" type="module"></script>
 </html>

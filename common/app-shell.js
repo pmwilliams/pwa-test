@@ -7,15 +7,16 @@ const routes = [
   { name: 'Share', path: 'pages/share/share.html', icon: 'share'},
 ]
 
-const addLink = (parent, rel, href) => {
+const addLink = (parent, rel, href, onload) => {
   const link = document.createElement('link');
   link.setAttribute('rel', rel);
   link.setAttribute('href', href);
   parent.appendChild(link);
+  return link;
 }
 
 const addStylesheet = (parent, href) => {
-  addLink(parent, 'stylesheet', href);
+  return addLink(parent, 'stylesheet', href);
 }
 
 const getNavLink = (route) => `<span class="mdc-list-item__ripple"></span>
@@ -37,9 +38,11 @@ const getFeatureItem = (feature) => {
 class ApplicationShell extends HTMLElement {
   constructor() {
     super();
-    this.shadowDom = this.attachShadow({mode:"open"});
+    this.shadowDom = this.attachShadow({mode:"open"});    
     this._browserSupport = [];
     this._alerts = [];
+
+    document.documentElement.style.visibility = 'hidden';
   }
 
   set browserSupport(array) {
@@ -61,27 +64,22 @@ class ApplicationShell extends HTMLElement {
   }
 
   connectedCallback() {
-    const relativePath = this.getAttribute('path');
-    addStylesheet(this.shadowDom, `${relativePath}common/app-shell.css`);
-    addStylesheet(this.shadowDom,"https://unpkg.com/material-components-web@13.0.0/dist/material-components-web.min.css");
-    addStylesheet(this.shadowDom,"https://fonts.googleapis.com/icon?family=Material+Icons");
     this.addElementsToHead();
-    this.initCustomElement();
+    this.initDomContent();
     this.initTheme();
     this.initTitle();
-    this.initNav();      
-    this.initMenu();
-    this.initTabs();
-    this.initDrawer();
-    this.initSnackBar();
-    this.updateBrowserSupport();
-
-    const pageTitle = this.getAttribute('page-title');
-    if (pageTitle) {
-      document.title = `${title} | ${pageTitle}`;
-    } else {
-      document.title = title;
-    }
+    this.initDrawer();      
+    this.initBrowserSupport();
+    document.documentElement.style.visibility = 'visible';
+    
+    window.addEventListener('DOMContentLoaded', () => {
+      this.initNav();
+      this.attachDrawer();
+      this.attachMenu();
+      this.attachTabs();
+      this.attachSnackBar();
+      this.updateBrowserSupport();
+    });
   }
 
   addElementsToHead() {
@@ -100,38 +98,22 @@ class ApplicationShell extends HTMLElement {
     `;
   }
 
-  addStylesheet(parent, href) {
-    const link = document.createElement('link');
-    link.setAttribute('rel', 'stylesheet');
-    link.setAttribute('href', href);
-    parent.appendChild(link);
-  }
-
-  initCustomElement() {
+  initDomContent() {
     const relativePath = this.getAttribute('path');
+    addStylesheet(this.shadowDom, `${relativePath}common/app-shell.css`);
+    addStylesheet(this.shadowDom,"https://unpkg.com/material-components-web@13.0.0/dist/material-components-web.min.css");
+    addStylesheet(this.shadowDom,"https://fonts.googleapis.com/icon?family=Material+Icons");
     this.shadowDom.innerHTML = this.shadowDom.innerHTML + html.replace('%relativePath%', relativePath);
   }
 
-  initTabs() {
-    this.tabBar = new window.mdc.tabBar.MDCTabBar(this.shadowDom.querySelector('.mdc-tab-bar'));
-    this.tabBar.listen('MDCTabBar:activated', (activatedEvent) => {
-      if (activatedEvent.detail.index === 1) {
-        this.shadowDom.querySelector('.content-pane').classList.remove('tab-selected');
-        this.shadowDom.querySelector('.browser-support').classList.add('tab-selected');
-      } else {
-        this.shadowDom.querySelector('.content-pane').classList.add('tab-selected');
-        this.shadowDom.querySelector('.browser-support').classList.remove('tab-selected');
-      }
-    });
-  }
-
-  initMenu() {
-    this.menu = new window.mdc.menu.MDCMenu(this.shadowDom.querySelector('.mdc-menu'));
-    this.menu.setAnchorCorner(window.mdc.menuSurface.Corner.BOTTOM_LEFT);
-    this.shadowDom.querySelector('#menu-button').addEventListener('click', () => this.menu.open = true);
-  }
-
   initTitle() {
+    const pageTitle = this.getAttribute('page-title');
+    if (pageTitle) {
+      document.title = `${title} | ${pageTitle}`;
+    } else {
+      document.title = title;
+    }
+
     this.shadowDom.querySelector('.mdc-top-app-bar__title').textContent = title;
   }
 
@@ -152,30 +134,55 @@ class ApplicationShell extends HTMLElement {
     })
   }
 
-  initSnackBar() {
+  initDrawer() {
+    if (window.matchMedia("(max-width: 1200px)").matches) {
+      this.shadowDom.querySelector('.mdc-drawer').classList.add("mdc-drawer--modal");
+    } 
+  }
+
+  attachTabs() {
+    this.tabBar = new window.mdc.tabBar.MDCTabBar(this.shadowDom.querySelector('.mdc-tab-bar'));
+    this.tabBar.listen('MDCTabBar:activated', (activatedEvent) => {
+      if (activatedEvent.detail.index === 1) {
+        this.shadowDom.querySelector('.content-pane').classList.remove('tab-selected');
+        this.shadowDom.querySelector('.browser-support').classList.add('tab-selected');
+      } else {
+        this.shadowDom.querySelector('.content-pane').classList.add('tab-selected');
+        this.shadowDom.querySelector('.browser-support').classList.remove('tab-selected');
+      }
+    });
+  }
+
+  attachMenu() {
+    this.menu = new window.mdc.menu.MDCMenu(this.shadowDom.querySelector('.mdc-menu'));
+    this.menu.setAnchorCorner(window.mdc.menuSurface.Corner.BOTTOM_LEFT);
+    this.shadowDom.querySelector('#menu-button').addEventListener('click', () => this.menu.open = true);
+  }
+
+  attachSnackBar() {
     this.snackbar = new window.mdc.snackbar.MDCSnackbar(this.shadowDom.querySelector('.mdc-snackbar'));
     this.snackbar.listen('MDCSnackbar:closed', () => this.showNextAlert());
     this.showNextAlert();
   }
 
-  initDrawer() {
+  attachDrawer() {
     this.drawer = window.matchMedia("(max-width: 1200px)").matches ?
-        this.initModalDrawer() : this.initPermanentDrawer();
+        this.attachModalDrawer() : this.attachPermanentDrawer();
     
     const resizeHandler = () => { 
       if (window.matchMedia("(max-width: 1200px)").matches && this.drawer instanceof window.mdc.list.MDCList) {
         this.drawer.destroy();
-        this.drawer = this.initModalDrawer();
+        this.drawer = this.attachModalDrawer();
       } else if (window.matchMedia("(min-width: 1200px)").matches && this.drawer instanceof window.mdc.drawer.MDCDrawer) {
         this.drawer.destroy();
-        this.drawer = this.initPermanentDrawer();
+        this.drawer = this.attachPermanentDrawer();
       }
     }
     
     window.addEventListener('resize', resizeHandler);
   }
 
-  initPermanentDrawer() {
+  attachPermanentDrawer() {
     const listElement = this.shadowDom.querySelector('.mdc-drawer .mdc-list');
     const drawerElement = this.shadowDom.querySelector('.mdc-drawer');
 
@@ -183,7 +190,7 @@ class ApplicationShell extends HTMLElement {
     return new window.mdc.list.MDCList(listElement);
   }
 
-  initModalDrawer() {
+  attachModalDrawer() {
     const topAppBarElement = this.shadowDom.querySelector('#app-bar');
     const listElement = this.shadowDom.querySelector('.mdc-drawer .mdc-list');
     const drawerElement = this.shadowDom.querySelector('.mdc-drawer');
@@ -243,6 +250,12 @@ class ApplicationShell extends HTMLElement {
     this.snackbar.open();
   }
 
+  initBrowserSupport() {
+    if (this.hasAttribute('browser-support')) {
+      this.shadowDom.querySelector('main').classList.add("show-browser-support");
+    }
+  }
+
   updateBrowserSupport() {
     const listElement = this.shadowDom.querySelector('#browser-support-list');
     listElement.innerHTML = '';
@@ -259,7 +272,6 @@ class ApplicationShell extends HTMLElement {
         });
         listElement.appendChild(groupElement);
       });
-      this.shadowDom.querySelector('main').classList.add("show-browser-support");
     }
   }
 }
