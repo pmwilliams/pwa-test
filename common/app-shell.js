@@ -41,8 +41,6 @@ class ApplicationShell extends HTMLElement {
     this.shadowDom = this.attachShadow({mode:"open"});    
     this._browserSupport = [];
     this._alerts = [];
-
-    document.documentElement.style.visibility = 'hidden';
   }
 
   set browserSupport(array) {
@@ -68,12 +66,11 @@ class ApplicationShell extends HTMLElement {
     this.initDomContent();
     this.initTheme();
     this.initTitle();
+    this.initNav();
     this.initDrawer();      
     this.initBrowserSupport();
-    document.documentElement.style.visibility = 'visible';
     
-    window.addEventListener('DOMContentLoaded', () => {
-      this.initNav();
+    window.addEventListener('load', () => {
       this.attachDrawer();
       this.attachMenu();
       this.attachTabs();
@@ -100,8 +97,8 @@ class ApplicationShell extends HTMLElement {
 
   initDomContent() {
     const relativePath = this.getAttribute('path');
-    addStylesheet(this.shadowDom, `${relativePath}common/app-shell.css`);
     addStylesheet(this.shadowDom,"https://unpkg.com/material-components-web@13.0.0/dist/material-components-web.min.css");
+    addStylesheet(this.shadowDom, `${relativePath}common/app-shell.css`);
     addStylesheet(this.shadowDom,"https://fonts.googleapis.com/icon?family=Material+Icons");
     this.shadowDom.innerHTML = this.shadowDom.innerHTML + html.replace('%relativePath%', relativePath);
   }

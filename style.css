@@ -1,3 +1,7 @@
+@import url("https://unpkg.com/material-components-web@13.0.0/dist/material-components-web.min.css");
+@import url("common/app-shell.css");
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+
 body {
   background: var(--mdc-theme-background);
   color: var(--mdc-theme-on-background);

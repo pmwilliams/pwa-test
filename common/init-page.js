@@ -30,5 +30,5 @@ const registerServiceWorker = (relativePath) => {
 
 export const initPage = relativePath => {
   registerServiceWorker(relativePath);
-  // window.addEventListener("load", () => registerAndInit());
+  window.addEventListener("load", () => registerAndInit());
 }

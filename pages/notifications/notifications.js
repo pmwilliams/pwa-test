@@ -94,7 +94,7 @@ const redrawNotifications = () => {
           
         });
         clone.querySelector('.notification-title').textContent = notification.title;
-        clone.querySelector('.notification-body').textContent = notification.body;
+        clone.querySelector('.notification-body').innerHTML = notification.body;
         clone.querySelector('.notification-source').textContent = notification.isLocal ? 'Local' : 'Service Worker';
         clone.querySelector('.notification-time').textContent = displayTime(notification.timestamp);
         if (notification.isClosed) {
