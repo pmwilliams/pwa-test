@@ -1,4 +1,4 @@
-var cacheName = 'pwa-test-v1';
+var cacheName = 'pwa-test-v2';
 var filesToCache = [
   'index.html',
   'style.css',
@@ -29,8 +29,10 @@ self.addEventListener('install', function(e) {
 
 self.addEventListener('fetch', function(e) {
   e.respondWith(
-    caches.match(e.request).then(function(response) {
-      return response || fetch(e.request);
+    caches.open(cacheName).then(function(cache) {
+      return cache.match(e.request).then(function(response) {
+        return response || fetch(e.request);
+      })
     })
   );
 });
