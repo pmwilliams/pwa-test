@@ -1,4 +1,4 @@
-var cacheName = 'pwa-test';
+var cacheName = 'pwa-test-v1';
 var filesToCache = [
   'index.html',
   'style.css',
