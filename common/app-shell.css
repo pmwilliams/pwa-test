@@ -65,51 +65,51 @@ main {
   padding: 0;
 }
 
-.browser-support {
+.api-summary {
   border-left: 1px solid rgba(0, 0, 0, 0.12);
   width: 300px;
   min-height: 100%;
   display: none;
 }
 
-:host(.dark) .browser-support {
+:host(.dark) .api-summary {
   background-color: rgba(255, 255, 255, 0.07);
 }
 
-.show-browser-support .browser-support {
+.show-api-summary .api-summary {
   display: block;
 }
 
-.browser-support li {
+.api-summary li {
   display: flex;
 }
 
-.browser-support .mdc-list-item__text {
+.api-summary .mdc-list-item__text {
   flex: 1;
 }
 
-.browser-support .mdc-list-item__meta i {
+.api-summary .mdc-list-item__meta i {
   vertical-align: middle;
   color: var(--mdc-theme-secondary);
   opacity: 0.5;
 }
 
-.browser-support .mdc-list-item__meta i.not-supported {
+.api-summary .mdc-list-item__meta i.not-supported {
   color: var(--mdc-theme-error);
 }
 
-:host(.dark) .browser-support .mdc-list-item__meta i {
+:host(.dark) .api-summary .mdc-list-item__meta i {
   opacity: 1;
 }
 
-.browser-support .mdc-list-item__primary-text {
+.api-summary .mdc-list-item__primary-text {
   font-family: 'Courier New', Courier, monospace;
-  font-size: 12px;
+  font-size: 0.75em;
 }
  
-.browser-support .mdc-list-group h5 {
+.api-summary .mdc-list-group h5 {
   font-family: 'Courier New', Courier, monospace;
-  font-size: 14px;
+  font-size: 0.85em;
   font-weight: bold;
   margin-bottom: 0;
 }
@@ -118,21 +118,21 @@ main {
   header {
     box-shadow: none;
   }
-  .show-browser-support .mdc-tab-bar {
-    display: block !important;
+  .show-api-summary .mdc-tab-bar {
+    display: block;
   }
   .content-pane,
-  .show-browser-support .browser-support {
+  .show-api-summary .api-summary {
     display: none;
   }
   .content-pane.tab-selected,
-  .show-browser-support .browser-support.tab-selected {
+  .show-api-summary .api-summary.tab-selected {
     display: block;
   }
-  :host(.dark) .show-browser-support .browser-support.tab-selected {
+  :host(.dark) .show-api-summary .api-summary.tab-selected {
     background-color: unset;
   }
-  .browser-support {
+  .api-summary {
     border-left: none;
     min-width: inherit;
     width: 100%;
@@ -152,16 +152,16 @@ main {
 }
 
 nav .mdc-list-item {
-  height: 48px;
+  height: 3em;
   align-items: center !important;
 }
 
 nav .mdc-list-item__text {
-  padding-left: 12px;
+  padding-left: 0.75em;
 }
 
 nav i {
-  max-width: 24px;
+  max-width: 1.5em;
 }
 
 :host(.dark) .mdc-menu::before {

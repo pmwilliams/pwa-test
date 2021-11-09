@@ -19,37 +19,21 @@ const addStylesheet = (parent, href) => {
   return addLink(parent, 'stylesheet', href);
 }
 
-const getNavLink = (route) => `<span class="mdc-list-item__ripple"></span>
-  <i class="material-icons mdc-list-item__graphic" aria-hidden="true">${route.icon}</i>
-  <span class="mdc-list-item__text">${route.name}</span>`
-
-const getFeatureItem = (feature) => {
-  const iconClass = feature.supported ? '' : 'not-supported';
-  const icon = feature.supported ? 'check_circle' : 'cancel';
-  return `<span class="mdc-list-item__ripple"></span>
-    <span class="mdc-list-item__text">
-      <span class="mdc-list-item__primary-text">${feature.name}</span>
-    </span>
-    <span class="mdc-list-item__meta">
-      <i class="material-icons mdc-list-item__graphic ${iconClass}" aria-hidden="true">${icon}</i>
-    </span>`
-}
-
 class ApplicationShell extends HTMLElement {
   constructor() {
     super();
     this.shadowDom = this.attachShadow({mode:"open"});    
-    this._browserSupport = [];
+    this._apiSummary = [];
     this._alerts = [];
   }
 
-  set browserSupport(array) {
-    this._browserSupport = array || [];
-    this.updateBrowserSupport();
+  set apiSummary(array) {
+    this._apiSummary = array || [];
+    this.updateApiSummary();
   }
 
-  get browserSupport() {
-    return this._browserSupport;
+  get apiSummary() {
+    return this._apiSummary;
   }
 
   alert(message) {
@@ -68,14 +52,14 @@ class ApplicationShell extends HTMLElement {
     this.initTitle();
     this.initNav();
     this.initDrawer();      
-    this.initBrowserSupport();
+    this.initApiSummary();
     
     window.addEventListener('load', () => {
       this.attachDrawer();
       this.attachMenu();
       this.attachTabs();
       this.attachSnackBar();
-      this.updateBrowserSupport();
+      this.updateApiSummary();
     });
   }
 
@@ -118,8 +102,9 @@ class ApplicationShell extends HTMLElement {
     const relativePath = this.getAttribute('path');
     const nav = this.shadowDom.querySelector('nav');
     routes.forEach(route => {
-      const link = document.createElement('a');
-      link.innerHTML = getNavLink(route);
+      const navItemTemplate = this.shadowDom.querySelector('#nav-link');
+      const newNavItem = navItemTemplate.content.cloneNode(true);
+      const link = newNavItem.querySelector('a');
       link.setAttribute('href', `${relativePath}${route.path}`);
       link.classList.add('mdc-list-item');
       if (window.location.href.endsWith(route.path)) {
@@ -127,6 +112,8 @@ class ApplicationShell extends HTMLElement {
         link.setAttribute('aria-current', 'page');
         link.tabIndex = 0;
       }
+      newNavItem.querySelector('.mdc-list-item__graphic').textContent = route.icon;
+      newNavItem.querySelector('.mdc-list-item__text').textContent = route.name;
       nav.appendChild(link);
     })
   }
@@ -142,10 +129,10 @@ class ApplicationShell extends HTMLElement {
     this.tabBar.listen('MDCTabBar:activated', (activatedEvent) => {
       if (activatedEvent.detail.index === 1) {
         this.shadowDom.querySelector('.content-pane').classList.remove('tab-selected');
-        this.shadowDom.querySelector('.browser-support').classList.add('tab-selected');
+        this.shadowDom.querySelector('.api-summary').classList.add('tab-selected');
       } else {
         this.shadowDom.querySelector('.content-pane').classList.add('tab-selected');
-        this.shadowDom.querySelector('.browser-support').classList.remove('tab-selected');
+        this.shadowDom.querySelector('.api-summary').classList.remove('tab-selected');
       }
     });
   }
@@ -247,24 +234,32 @@ class ApplicationShell extends HTMLElement {
     this.snackbar.open();
   }
 
-  initBrowserSupport() {
-    if (this.hasAttribute('browser-support')) {
-      this.shadowDom.querySelector('main').classList.add("show-browser-support");
+  initApiSummary() {
+    if (this.hasAttribute('api-summary')) {
+      this.shadowDom.querySelector('main').classList.add("show-api-summary");
+      document.body.classList.add("show-api-summary");
     }
   }
 
-  updateBrowserSupport() {
-    const listElement = this.shadowDom.querySelector('#browser-support-list');
+  updateApiSummary() {
+    const listElement = this.shadowDom.querySelector('#api-summary-list');
     listElement.innerHTML = '';
-    if (this.browserSupport.length) {
-      this.browserSupport.forEach(group => {
+    if (this.apiSummary.length) {
+      this.apiSummary.forEach(group => {
         const groupElement = document.createElement('div');
         groupElement.innerHTML = `<h5 class="mdc-list-group__subheader">${group.name}</h5>`
         groupElement.classList.add('mdc-list-group');
         group.items.forEach(feature => {
-          const listItem = document.createElement('li');
-          listItem.innerHTML = getFeatureItem(feature);
+          const featureItemTemplate = this.shadowDom.querySelector('#feature-item');
+          const featureItem = featureItemTemplate.content.cloneNode(true);
+          const listItem = featureItem.querySelector('li');
           listItem.classList.add('mdc-list-item');
+          listItem.querySelector('.mdc-list-item__primary-text').textContent = feature.name;
+          const iconElement = listItem.querySelector('.mdc-list-item__graphic') 
+          iconElement.textContent = feature.supported ? 'check_circle' : 'cancel';
+          if (!feature.supported) {
+            iconElement.classList.add('not-supported');
+          }
           groupElement.appendChild(listItem);
         });
         listElement.appendChild(groupElement);
@@ -274,6 +269,24 @@ class ApplicationShell extends HTMLElement {
 }
 
 const html = `
+  <template id="nav-link">
+    <a>
+      <span class="mdc-list-item__ripple"></span>
+        <i class="material-icons mdc-list-item__graphic" aria-hidden="true"></i>
+        <span class="mdc-list-item__text"></span>
+    </a>
+  </template>
+  <template id="feature-item">
+    <li>
+      <span class="mdc-list-item__ripple"></span>
+      <span class="mdc-list-item__text">
+        <span class="mdc-list-item__primary-text"></span>
+      </span>
+      <span class="mdc-list-item__meta">
+        <i class="material-icons mdc-list-item__graphic" aria-hidden="true"></i>
+      </span>
+    </li>
+  </template>
   <header class="mdc-top-app-bar app-bar" id="app-bar">
     <div class="mdc-top-app-bar__row">
       <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
@@ -353,8 +366,8 @@ const html = `
         <div class="content-pane tab-selected">
           <slot><p>No page content<p></slot>
         </div>
-        <aside class="browser-support">
-          <ul id="browser-support-list" class="mdc-list">
+        <aside class="api-summary">
+          <ul id="api-summary-list" class="mdc-list">
         </aside>
       </div>
     </div>

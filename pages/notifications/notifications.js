@@ -212,7 +212,7 @@ const notify = () => {
       }
     }
   });
-  document.querySelector('.content').classList.remove('create-notification');
+  hideCreateNotification();
   document.querySelector('#notifications').scrollIntoView({ behavior: 'smooth' })
 }
 
@@ -304,4 +304,4 @@ document.querySelector('#notify-button').addEventListener('click', () => notify(
 document.querySelector('#create-notification-fab').addEventListener('click', () => showCreateNotification());
 document.querySelector('#close-create-notification').addEventListener('click', () => hideCreateNotification());
 
-app.browserSupport = getApi();
+app.apiSummary = getApi();

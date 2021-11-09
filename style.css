@@ -34,11 +34,28 @@ application-shell {
   display: flex;
 }
 
+.fab {
+  position: fixed;
+  bottom: 3em;
+  right: 3em;
+  z-index: 1;
+}
+
+.show-api-summary .fab {
+  right: 348px;
+}
+
+@media (max-width: 900px) {
+  .fab {
+    right: 3em;
+  }
+}
+
 .activity-heading {
   display: flex;
   align-items: center;
   background-color: #fff;
-  padding: 6px 12px 6px 6px; 
+  padding: 0.4em 0.75em 0.4em 0.4em; 
 }
 
 .dark .activity-heading {
@@ -47,7 +64,7 @@ application-shell {
 }
 
 .activity-heading i {
-  padding-right: 12px;
+  padding-right: 0.75em;
 }
 
 .activity-heading h4 {
@@ -72,7 +89,7 @@ application-shell {
 
 .mdc-chip i {
   color: rgba(0, 0, 0, 0.5);
-  font-size: 20px;
+  font-size: 1.25em;
 }
 
 .dark .mdc-chip {
