@@ -82,7 +82,7 @@ const redrawNotifications = () => {
       } else {
         const template = document.querySelector('#notification-item')
         var clone = template.content.cloneNode(true);
-        const listItem = clone.querySelector('li')
+        const listItem = clone.querySelector('li');
         listItem.setAttribute('data-timestamp', notification.timestamp);
         listItem.addEventListener('click', () => {
           if (listItem.classList.contains('expanded')) {
@@ -94,7 +94,7 @@ const redrawNotifications = () => {
           
         });
         clone.querySelector('.notification-title').textContent = notification.title;
-        clone.querySelector('.notification-body').innerHTML = notification.body;
+        clone.querySelector('.notification-body').textContent = notification.body;
         clone.querySelector('.notification-source').textContent = notification.isLocal ? 'Local' : 'Service Worker';
         clone.querySelector('.notification-time').textContent = displayTime(notification.timestamp);
         if (notification.isClosed) {
