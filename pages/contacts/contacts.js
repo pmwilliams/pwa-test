@@ -16,10 +16,10 @@ const drawContacts = (contacts) => {
     .forEach(contact => {
       const template = document.querySelector('#contact-item')
       var clone = template.content.cloneNode(true);
-      clone.querySelector('.contact-name').textContent = contact.name.length ? contact.name[0] : 'n/a';
-      clone.querySelector('.contact-address').textContent = contact.address.length ? contact.address[0] : 'n/a';
-      clone.querySelector('.contact-email').textContent = contact.email.length ? contact.email[0] : 'n/a';
-      clone.querySelector('.contact-tel').textContent = contact.tel.length ? contact.tel[0] : 'n/a';
+      clone.querySelector('.contact-name').textContent = contact.name.length ? contact.name[0] : 'no name';
+      clone.querySelector('.contact-address').textContent = contact.address.length ? contact.address[0] : 'no address';
+      clone.querySelector('.contact-tel').textContent = contact.tel.length ? contact.tel[0] : 'no phone number';
+      clone.querySelector('.contact-email').textContent = contact.email.length ? contact.email[0] : 'no email';
       list.insertBefore(clone, list.firstChild);
     });
   const items = list.querySelectorAll('li');

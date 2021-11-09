@@ -86,8 +86,12 @@
   z-index: -1;
 }
 
-#contacts .mdc-list-item__text.contact-content {
+#contacts .mdc-list-item__text.contact-left {
   flex: 1;
+}
+
+#contacts .mdc-list-item__text.contact-right {
+  text-align: right;
 }
 
 #contacts .contact-name,
