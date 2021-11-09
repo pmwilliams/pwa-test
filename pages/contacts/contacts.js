@@ -4,11 +4,20 @@ import {
 
 initPage('../../');
 
+const supportedProperties = navigator.contacts ? await navigator.contacts.getProperties() : [];
+const opts = { multiple: true };
+
+const onFabClick = async () => {
+  const selected = await navigator.contacts.select(supportedProperties, opts);
+  document.querySelector('#selected').textContent = JSON.stringify(selected);
+}
+
+document.querySelector('#add-contacts-fab').addEventListener('click', onFabClick);
+
 const app = document.querySelector('application-shell');
 
 const isContactsManagerSupported = () => Boolean(window.ContactsManager);
 const isContactsSupported = () => Boolean(navigator.contacts);
-const supportedProperties = navigator.contacts ? await navigator.contacts.getProperties() : [];
 
 const getApi = () => ([
   { 
