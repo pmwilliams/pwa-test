@@ -41,8 +41,10 @@ application-shell {
   z-index: 1;
 }
 
-.show-api-summary .fab {
-  right: 348px;
+@media (min-width: 900px) {
+  .show-api-summary .fab {
+    right: 348px;
+  }
 }
 
 @media (max-width: 900px) {
