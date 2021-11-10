@@ -20,7 +20,7 @@ const drawContacts = (contacts) => {
         clone.querySelector('.contact-name').textContent = contact.name[0];
       }
       if (contact.address.length) {
-        clone.querySelector('.contact-address').textContent = contact.address[0];
+        clone.querySelector('.contact-address').textContent = contact.address[0].addressLine;
       }
       if (contact.tel.length) {
         clone.querySelector('.contact-phone').textContent = contact.tel[0];
