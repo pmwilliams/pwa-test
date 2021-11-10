@@ -16,10 +16,19 @@ const drawContacts = (contacts) => {
     .forEach(contact => {
       const template = document.querySelector('#contact-item')
       var clone = template.content.cloneNode(true);
-      clone.querySelector('.contact-name').textContent = contact.name.length ? contact.name[0] : 'no name';
-      clone.querySelector('.contact-address').textContent = contact.address.length ? contact.address[0] : 'no address';
-      clone.querySelector('.contact-tel').textContent = contact.tel.length ? contact.tel[0] : 'no phone number';
-      clone.querySelector('.contact-email').textContent = contact.email.length ? contact.email[0] : 'no email';
+      if (contact.name.length) {
+        clone.querySelector('.contact-name').textContent = contact.name[0];
+      }
+      if (contact.address.length) {
+        clone.querySelector('.contact-address').textContent = contact.address[0];
+      }
+      if (contact.tel.length) {
+        clone.querySelector('.contact-phone').textContent = contact.tel[0];
+      }
+      if (contact.email.length) {
+        clone.querySelector('.contact-email').textContent = contact.email[0];
+        clone.querySelector('.contact-email-link').setAttribute('href', `mailto:${contact.email[0]}`);
+      }
       list.insertBefore(clone, list.firstChild);
     });
   const items = list.querySelectorAll('li');
@@ -31,9 +40,9 @@ const drawContacts = (contacts) => {
 const onFabClick = async () => {
   if (!navigator.contacts) {
     drawContacts([
-      { address: ["address"], email: ["email"], name: ["name"], tel: ["tel"] },
+      { address: ["address"], email: ["bob@bob.com"], name: ["name"], tel: ["tel"] },
       { address: [], email: [], name: [], tel: [] },
-      { address: ["address2"], email: ["email2"], name: ["name2"], tel: ["tel2"] }
+      { address: ["address2"], email: ["bill@bob.com"], name: ["name2"], tel: ["tel2"] }
     ]);
   } else {
     const selected = await navigator.contacts.select(supportedProperties, opts);

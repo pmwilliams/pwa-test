@@ -94,20 +94,44 @@
   text-align: right;
 }
 
-#contacts .contact-name,
-#contacts .contact-address {
-  max-width: 150px;
-  word-wrap: break-word;
+.contact-list {
+  display: flex;
+  padding: 1em;
+  margin: 0;
+  flex-wrap: wrap;
+  gap: 1em;
+}
+
+.contact-card {
+  flex: 1;
+  min-width: 250px;
+  flex-direction: column;
+}
+
+.card-header {
+  display: flex;
+  gap: 1em;
+  margin: 1em 1em;
+}
+
+.card-content {
+  margin: 1em;
+  flex: 1;
+}
+
+.card-icon {
+  max-width: 4em;
+  max-height: 4em;
+}
+
+.card-text {
+  flex: 1;
+}
+
+.contact-name,
+.contact-phone,
+.contact-address,
+.contact-email {
+  white-space: nowrap;
   text-overflow: ellipsis;
-}
-
-#contacts .contact-email {
-  font-weight: normal;
-  font-size: var(--mdc-typography-body2-font-size, 0.875rem);
-  color: var(--mdc-theme-text-secondary-on-background, rgba(0, 0, 0, 0.54));
-}
-
-#contacts .contact-email,
-#contacts .contact-tel {
-  text-align: right;
 }
