@@ -27,7 +27,6 @@ const drawContacts = (contacts) => {
       }
       if (contact.email.length) {
         clone.querySelector('.contact-email').textContent = contact.email[0];
-        clone.querySelector('.contact-email-link').setAttribute('href', `mailto:${contact.email[0]}`);
       }
       list.insertBefore(clone, list.firstChild);
     });
@@ -40,9 +39,9 @@ const drawContacts = (contacts) => {
 const onFabClick = async () => {
   if (!navigator.contacts) {
     drawContacts([
-      { address: ["address"], email: ["bob@bob.com"], name: ["name"], tel: ["tel"] },
-      { address: [], email: [], name: [], tel: [] },
-      { address: ["address2"], email: ["bill@bob.com"], name: ["name2"], tel: ["tel2"] }
+      { address: ["address"], email: ["bob@bob.com"], name: ["Bob"], tel: ["tel"] },
+      { address: [], email: [], name: ["Steve"], tel: ["234 232 3232"] },
+      { address: ["address2"], email: ["bill@bob.com"], name: ["Harry"], tel: ["tel2"] }
     ]);
   } else {
     const selected = await navigator.contacts.select(supportedProperties, opts);

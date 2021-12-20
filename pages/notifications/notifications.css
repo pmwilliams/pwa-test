@@ -10,16 +10,17 @@ h5 {
 #notifications {
   position: relative;
   width: 100%;
+  max-width: 100%
 }
 
 #notifications .no-notifications {
   opacity: 0;
   position: absolute;
-  top: 1.5em;
+  top: 1.5rem;
   width: 100%;
   transition: opacity 250ms;
   display: flex;
-  padding-top: 0.75em;
+  padding-top: 0.75rem;
   flex-direction: column;
   align-items: center;
   vertical-align: middle;
@@ -54,7 +55,7 @@ h5 {
 
 #notifications .no-notifications h3 {
   font-weight: normal;
-  margin: 0 0 0.75em;
+  margin: 0 0 0.75rem;
 }
 
 #notifications .no-notifications .tagline {
@@ -63,12 +64,12 @@ h5 {
 }
 
 #notifications li {
-  flex-wrap: wrap;
-  padding: 0.75em 0.75em;
+  padding: 0.75rem 0.75rem;
   align-items: center;
-  height: 3em;
+  height: 75px;
   overflow: hidden;
   transition: height 500ms;
+  cursor: default;
 }
 
 #notifications li.expanded {
@@ -166,67 +167,105 @@ h5 {
 
 #notifications .mdc-list-item__text.notification-content {
   flex: 1;
+  min-width: 0;
+  overflow: hidden;
+}
+
+#notifications .notification-title {
+  font-weight: bold;
 }
 
 #notifications .notification-title,
 #notifications .notification-body {
-  max-width: 150px;
-  word-wrap: break-word;
+  color: var(--mdc-theme-on-surface-high-emphasis);
+}
+
+#notifications .notification-title,
+#notifications .notification-body,
+#notifications .notification-source {
+  white-space: nowrap;
+  overflow: hidden;
   text-overflow: ellipsis;
 }
 
 #notifications .notification-source {
-  font-weight: normal;
-  font-size: var(--mdc-typography-body2-font-size, 0.875rem);
-  color: var(--mdc-theme-text-secondary-on-background, rgba(0, 0, 0, 0.54));
+  margin-right: 0.5em;
 }
 
-#notifications .notification-source,
-#notifications .notification-time {
-  text-align: right;
+#notifications .notification-more-info {
+  text-decoration: none;
+  color: var(--mdc-theme-secondary);
 }
 
-#notifications .notification-details {
-  flex-basis: 100%;
-  margin: 0.75em 2em 0.4em 3em;
+#more-info-dialog .scroller {
+  max-height: 70vh;
+  overflow-y: auto;
+  border-top: 1px solid rgba(0, 0, 0, 0.12);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
 }
 
-#notifications .notification-details div {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
+.dark #more-info-dialog .scroller {
+  border-color: rgba(255, 255, 255, 0.24);
 }
 
-#notifications .notification-details .mdc-chip-set {
-  margin: 0;
-}
-
-#notifications .notification-details .mdc-chip {
-  font-size: 0.75em;
-  padding: 0 0.5em;
-  height: 1.75em;
-}
-
-#notifications .notification-details .mdc-chip i {
-  font-size: 0.9em;
-  margin-right: 0.4em;
-}
-
-#notifications .notification-details .mdc-chip.hide {
+#more-info-dialog .setting.hide,
+#more-info-dialog .notification-action.hide {
   display: none;
 }
 
-#notifications .notification-details .mdc-chip.selected {
-  color: var(--mdc-theme-primary);
+#more-info-dialog .notification-body,
+#more-info-dialog .mdc-dialog__title {
+  color: var(--mdc-theme-on-surface-high-emphasis);
 }
 
-#notifications .notification-details .error-section {
-  padding: 0.5em;
+#more-info-dialog #dialog-content {
+  flex-shrink: 0;
+}
+
+#more-info-dialog .notification-body {
+  max-width: 250px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;  
+}
+
+#more-info-dialog .error-section {
   color: var(--mdc-theme-error);
+  max-width: 300px;
 }
 
-#notifications .notification-details .error-section:empty {
+#more-info-dialog .error-section:empty {
   display: none;
+}
+
+#more-info-dialog section {
+  margin-bottom: 1rem;
+  color: var(--mdc-theme-on-surface-high-emphasis);
+}
+
+#more-info-dialog .mdc-chip-set {
+  padding-left: 0;
+  margin-left: -5px;
+  pointer-events: none;
+}
+
+#dialog-settings .setting {
+  display: flex;
+  margin-bottom: 0.5rem;
+  justify-content: space-between;
+}
+
+#dialog-settings .setting i,
+#dialog-settings .setting div {
+  min-width: 2rem;
+  text-align: center;
+}
+
+.dark #dialog-settings .setting i,
+.dark #dialog-settings .setting div {
+  color: var(--mdc-theme-primary);
 }
 
 #create-notification {
@@ -238,12 +277,12 @@ h5 {
 }
 
 .mdc-text-field {
-  margin: 1em 0 0;
-  width: calc(100% - 0.6em);
+  margin: 1rem 0 0;
+  width: calc(100% - 0.6rem);
 }
 
 .mdc-chip-set {
-  margin-bottom: 1.5em;
+  margin-bottom: 1.5rem;
 }
 
 .mdc-chip-set--filter .mdc-chip i {
@@ -253,12 +292,12 @@ h5 {
 }
 
 .mdc-chip-set--filter .mdc-chip.mdc-chip--selected i {
-  width: 1.5em;
+  width: 1.5rem;
   transition: width 200ms;
 }
 
 #notify-button {
-  margin: 1.5em 0;
+  margin: 1.5rem 0;
   width: 100%;
   background-color: var(--mdc-theme-secondary);
 }

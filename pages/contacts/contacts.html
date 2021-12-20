@@ -10,21 +10,17 @@
   </head>
 
   <template id="contact-item">
-    <div class="contact-card mdc-card--outlined">
-      <div class="card-header">
-        <img class="card-icon" src="../../images/icon-256.png"/>
-        <div class="card-text">
-          <div class="contact-name mdc-typography--headline6">n/a</div>
-          <div class="contact-phone mdc-typography--subtitle1">n/a</div>
-        </div>
-      </div>
-      <div class="card-content">
-        <div class="contact-address mdc-typography--body2">n/a</div>
-        <a class="contact-email-link" href="#">
-          <div class="contact-email mdc-typography--body2">n/a</div>
-        </a>
-      </div>
-    </div>
+    <li tabindex="0" class="mdc-list-item">
+      <span class="mdc-list-item__graphic contact-graphic">
+        <img class="contact-icon" src="../../images/icon-256.png"/>
+      </span>
+      <span class="mdc-list-item__text contact-content">
+        <div class="mdc-list-item__secondary-text contact-name"></div>
+        <div class="mdc-list-item__secondary-text contact-address"></div>
+        <div class="mdc-list-item__secondary-text contact-email"></div>
+        <div class="mdc-list-item__secondary-text contact-phone"></div>
+      </span>
+    </li>
   </template>
 
   <body class="mdc-typography">
@@ -35,7 +31,7 @@
           <span class="mdc-fab__icon material-icons">person_add_alt</span>
         </button>
         <div id="contacts">
-          <ul class="contact-list" data-mdc-auto-init="MDCList"></ul>
+          <ul class="mdc-list mdc-list--two-line" data-mdc-auto-init="MDCList"></ul>
           <div class="no-contacts">
             <i class="material-icons">
               contacts

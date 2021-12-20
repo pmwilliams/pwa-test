@@ -3,11 +3,13 @@
   
   <head>
     <meta charset="utf-8" />
+    <meta name="description" content="Demonstration of web Notifications API.">
     <link rel="stylesheet" href="../../style.css">
     <link rel="stylesheet" href="notifications.css">  
     <script src="../../common/app-shell.js"></script>
     <script defer src="https://unpkg.com/material-components-web@13.0.0/dist/material-components-web.min.js"></script>
-    <script src="notifications.js" type="module"></script>
+    <script defer src="notifications.js" type="module"></script>
+    <script defer src="notifications-api.js" type="module"></script>
   </head>
 
   <template id="notification-item">
@@ -16,56 +18,11 @@
         <i class="material-icons notification-status" aria-hidden="true">notifications</i>
       </span>
       <span class="mdc-list-item__text notification-content">
-        <div class="mdc-list-item__primary-text notification-title"></div>
+        <div class="mdc-list-item__secondary-text notification-title"></div>
         <div class="mdc-list-item__secondary-text notification-body"></div>
+        <span class="mdc-list-item__secondary-text"><span class="notification-source"></span>
+          <a class="notification-more-info" href="javascript:void(0)">(more info)</a></span>
       </span>
-      <span class="mdc-list-item__text">
-        <span class="mdc-list-item__primary-text notification-source"></span>
-        <span class="mdc-list-item__secondary-text notification-time"></span>
-      </span>
-      <span class="mdc-list-item__graphic expand-container">
-        <i class="material-icons notification-expand" aria-hidden="true">expand_more</i>
-      </span>
-      <div class="notification-details">
-        <div class="mdc-chip-set">
-          <div class="mdc-chip notification-icon">
-            <i class="material-icons mdc-button__icon" aria-hidden="true">cloud</i>
-            <div class="mdc-chip__text">icon</div>
-          </div>
-          <div class="mdc-chip notification-badge">
-            <i class="material-icons mdc-button__icon" aria-hidden="true">favorite</i>
-            <div class="mdc-chip__text">badge</div>
-          </div>
-          <div class="mdc-chip notification-image">
-            <i class="material-icons mdc-button__icon" aria-hidden="true">thumb_up</i>
-            <div class="mdc-chip__text">image</div>
-          </div>
-          <div class="mdc-chip notification-silent">
-            <div class="mdc-chip__text">silent</div>
-          </div>
-          <div class="mdc-chip notification-require-interaction">
-            <div class="mdc-chip__text">require interaction</div>
-          </div>
-          <div class="mdc-chip notification-renotify">
-            <div class="mdc-chip__text">renotify</div>
-          </div>
-          <div class="mdc-chip notification-dir">
-            <div class="mdc-chip__text"></div>
-          </div>
-        </div>
-        <div class="mdc-chip-set">
-          <div class="mdc-chip notification-action-open">
-            <div class="mdc-chip__text">Open</div>
-          </div>
-          <div class="mdc-chip notification-action-explore">
-            <div class="mdc-chip__text">Explore</div>
-          </div>
-          <div class="mdc-chip notification-action-dismiss">
-            <div class="mdc-chip__text">Dismiss</div>
-          </div>
-        </div>
-        <div class="mdc-typography--body2 error-section"></div>
-      </div>
     </li>
   </template>
 
@@ -99,9 +56,10 @@
                   <label class="mdc-text-field mdc-text-field--filled" data-mdc-auto-init="MDCTextField">
                     <span class="mdc-text-field__ripple"></span>
                     <span class="mdc-floating-label" id="notification-title-label">Title</span>
-                    <input class="mdc-text-field__input" id="notification-title" value="Notification" type="text"
+                    <input class="mdc-text-field__input" id="notification-title" value="Reminder" type="text"
                       aria-labelledby="notification-title-label" aria-controls="notifiction-title-helper"
-                      aria-describedby="notifiction-title-helper">
+                      aria-describedby="notifiction-title-helper"
+                      maxlength="20">
                     <span class="mdc-line-ripple"></span>
                   </label>
                   <div class="mdc-text-field-helper-line">
@@ -112,9 +70,10 @@
                   <label class="mdc-text-field mdc-text-field--filled" data-mdc-auto-init="MDCTextField">
                     <span class="mdc-text-field__ripple"></span>
                     <span class="mdc-floating-label" id="notification-content-label">Body</span>
-                    <input class="mdc-text-field__input" id="notification-content" value="This is a notification"
+                    <input class="mdc-text-field__input" id="notification-content" value="Your library books are overdue, please return them to your local library to avoid hefty fines."
                       type="text" aria-labelledby="notification-content-label" aria-controls="notifiction-content-helper"
-                      aria-describedby="notifiction-content-helper">
+                      aria-describedby="notifiction-content-helper"
+                      maxlength="100">
                     <span class="mdc-line-ripple"></span>
                   </label>
                   <div class="mdc-text-field-helper-line">
@@ -127,7 +86,8 @@
                     <span class="mdc-floating-label" id="notification-tag-label">Tag</span>
                     <input class="mdc-text-field__input" id="notification-tag" type="text"
                       aria-labelledby="notification-tag-label" aria-controls="notifiction-tag-helper"
-                      aria-describedby="notifiction-tag-helper">
+                      aria-describedby="notifiction-tag-helper"
+                      maxlength="4">
                     <span class="mdc-line-ripple"></span>
                   </label>
                   <div class="mdc-text-field-helper-line">
@@ -290,5 +250,76 @@
         </div>
       </div>
     </application-shell>
+    <div id="more-info-dialog" class="mdc-dialog">
+      <div class="mdc-dialog__container">
+        <div class="mdc-dialog__surface"
+          role="alertdialog"
+          aria-modal="true"
+          aria-labelledby="dialog-title"
+          aria-describedby="dialog-content">
+          <div class="mdc-dialog__title" id="dialog-title"></div>
+          <div class="mdc-dialog__content" id="dialog-content">
+            <div class="notification-body"></div>
+          </div>
+          <div class="scroller">
+            <div class="mdc-dialog__content" id="dialog-settings">
+              <section class="mdc-typography--body2 error-section"></section>   
+              <section>
+                <div class="setting notification-tag">
+                  tag
+                  <div></div>
+                </div>
+                <div class="setting notification-icon">
+                  icon
+                  <i class="material-icons mdc-button__icon" aria-hidden="true">cloud</i>
+                </div>
+                <div class="setting notification-badge">
+                  badge
+                  <i class="material-icons mdc-button__icon" aria-hidden="true">favorite</i>
+                </div>
+                <div class="setting notification-image">
+                  image
+                  <i class="material-icons mdc-button__icon" aria-hidden="true">thumb_up</i>
+                </div>
+                <span class="setting notification-silent">
+                  silent
+                  <i class="material-icons mdc-button__icon" aria-hidden="true">check</i>
+                </span>
+                <span class="setting notification-require-interaction">
+                  require interaction
+                  <i class="material-icons mdc-button__icon" aria-hidden="true">check</i>
+                </span>
+                <span class="setting notification-renotify">
+                  renotify
+                  <i class="material-icons mdc-button__icon" aria-hidden="true">check</i>
+                </span>
+                <div class="setting notification-dir">
+                  direction
+                  <div></div>
+                </div>
+              </section>
+              <div class="mdc-chip-set">
+                <div class="mdc-chip notification-action open">
+                  <div class="mdc-chip__text">Open</div>
+                </div>
+                <div class="mdc-chip notification-action explore">
+                  <div class="mdc-chip__text">Explore</div>
+                </div>
+                <div class="mdc-chip notification-action dismiss">
+                  <div class="mdc-chip__text">Dismiss</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="mdc-dialog__actions">
+            <button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="discard">
+              <div class="mdc-button__ripple"></div>
+              <span class="mdc-button__label">Close</span>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="mdc-dialog__scrim"></div>
+    </div>
   </body>
 </html>

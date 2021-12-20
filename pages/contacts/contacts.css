@@ -57,41 +57,11 @@
   flex-wrap: wrap;
   padding: 0.75em 0.75em;
   align-items: center;
-  height: 3em;
-  overflow: hidden;
   transition: height 500ms;
 }
 
-#contacts .item-icon {
+#contacts .contact-graphic {
   margin-right: 12px;
-}
-
-#contacts .contact-icon {
-  margin: 12px;
-  position: relative;
-  z-index: 1;
-  color: var(--mdc-theme-secondary);
-}
-
-#contacts .contact-icon:before,
-#contacts .contact-icon:after {
-  position: absolute;
-  top: -12px;
-  left: -12px;
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  content: '';
-  background-color: rgba(1, 135, 134, 0.2);
-  z-index: -1;
-}
-
-#contacts .mdc-list-item__text.contact-left {
-  flex: 1;
-}
-
-#contacts .mdc-list-item__text.contact-right {
-  text-align: right;
 }
 
 .contact-list {
@@ -102,30 +72,18 @@
   gap: 1em;
 }
 
-.contact-card {
-  flex: 1;
-  min-width: 250px;
-  flex-direction: column;
+.contact-icon {
+  max-width: 3em;
+  max-height: 3em;
+  clip-path: circle(24px at center);
 }
 
-.card-header {
-  display: flex;
-  gap: 1em;
-  margin: 1em 1em;
+.contact-content {
+  min-height: 4em;
 }
 
-.card-content {
-  margin: 1em;
-  flex: 1;
-}
-
-.card-icon {
-  max-width: 4em;
-  max-height: 4em;
-}
-
-.card-text {
-  flex: 1;
+.contact-name {
+  font-weight: bold;
 }
 
 .contact-name,
@@ -134,4 +92,12 @@
 .contact-email {
   white-space: nowrap;
   text-overflow: ellipsis;
+  color: var(--mdc-theme-on-surface-high-emphasis);
+}
+
+.contact-name:empty,
+.contact-phone:empty,
+.contact-address:empty,
+.contact-email:empty {
+  display: none;
 }

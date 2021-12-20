@@ -29,6 +29,22 @@ body.dark {
   --mdc-checkbox-unchecked-color: var(--mdc-theme-on-surface-medium-emphasis);
 }
 
+.dark * {
+  scrollbar-color: dark;
+}
+
+.dark *::-webkit-scrollbar {
+  width: inherit;             /* width of the entire scrollbar */
+}
+
+.dark *::-webkit-scrollbar-track {
+  background: rgba(255,255,255,0.05);        /* color of the tracking area */
+}
+
+.dark *::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.12);    /* color of the scroll thumb */
+}
+
 application-shell {
   width: 100%;
   display: flex;
@@ -136,4 +152,8 @@ application-shell {
 
 .dark .mdc-radio .mdc-radio__native-control:enabled:not(:checked)+.mdc-radio__background .mdc-radio__outer-circle {
   border-color: var(--mdc-theme-on-surface-medium-emphasis);
+}
+
+.dark .mdc-dialog .mdc-dialog__scrim {
+  background-color: rgba(255, 255, 255, 0.12);
 }

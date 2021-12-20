@@ -3,15 +3,15 @@
 }
 
 :host(.dark) *::-webkit-scrollbar {
-  width: inherit;             /* width of the entire scrollbar */
+  width: inherit;
 }
 
 :host(.dark) *::-webkit-scrollbar-track {
-  background: rgba(255,255,255,0.05);        /* color of the tracking area */
+  background: rgba(255,255,255,0.05);
 }
 
 :host(.dark) *::-webkit-scrollbar-thumb {
-  background-color: rgba(255, 255, 255, 0.12);    /* color of the scroll thumb */
+  background-color: rgba(255, 255, 255, 0.12);
 }
 
 :host(.dark) .mdc-top-app-bar {
@@ -29,7 +29,7 @@
 }
 
 header {
-  box-shadow: 0px 0px 10px 2px #666666;
+  box-shadow: none;
 }
 
 :host(.dark) header {
@@ -41,10 +41,7 @@ main {
   flex-direction: column;
   flex: 1;
   z-index: 3;
-}
-
-.mdc-tab-bar {
-  display: none;
+  min-width: 0;
 }
 
 .content-scroller {
@@ -58,17 +55,28 @@ main {
   flex: 1;
   height: max-content;
   min-height: 100%;
+  min-width: 0;
 }
 
 .content-pane {
   flex: 2;
   padding: 0;
+  min-width: 0;
+}
+
+.mdc-tab-bar {
+  display: none;
+}
+
+.show-api-summary .mdc-tab-bar {
+  display: block;
 }
 
 .api-summary {
-  border-left: 1px solid rgba(0, 0, 0, 0.12);
-  width: 300px;
-  min-height: 100%;
+  border-left: none;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
   display: none;
 }
 
@@ -77,7 +85,16 @@ main {
 }
 
 .show-api-summary .api-summary {
+  display: none;
+}
+
+.content-pane.tab-selected,
+.show-api-summary .api-summary.tab-selected {
   display: block;
+}
+
+:host(.dark) .show-api-summary .api-summary.tab-selected {
+  background-color: unset;
 }
 
 .api-summary li {
@@ -104,40 +121,32 @@ main {
 
 .api-summary .mdc-list-item__primary-text {
   font-family: 'Courier New', Courier, monospace;
-  font-size: 0.75em;
+  font-size: 0.75rem;
 }
  
 .api-summary .mdc-list-group h5 {
   font-family: 'Courier New', Courier, monospace;
-  font-size: 0.85em;
+  font-size: 0.85rem;
   font-weight: bold;
   margin-bottom: 0;
 }
 
-@media (max-width: 900px) {
+@media (min-width: 900px) {
   header {
-    box-shadow: none;
+    box-shadow: 0px 0px 10px 2px #666666;
   }
   .show-api-summary .mdc-tab-bar {
-    display: block;
+    display: none;
   }
   .content-pane,
   .show-api-summary .api-summary {
-    display: none;
-  }
-  .content-pane.tab-selected,
-  .show-api-summary .api-summary.tab-selected {
     display: block;
   }
-  :host(.dark) .show-api-summary .api-summary.tab-selected {
-    background-color: unset;
-  }
   .api-summary {
-    border-left: none;
-    min-width: inherit;
-    width: 100%;
-    height: 100%;
-    z-index: 0;
+    border-left: 1px solid rgba(0, 0, 0, 0.12);
+    width: 300px;
+    min-height: 100%;
+    display: none;
   }
 }
 
@@ -152,17 +161,21 @@ main {
 }
 
 nav .mdc-list-item {
-  height: 3em;
+  height: 3rem;
   align-items: center !important;
 }
 
 nav .mdc-list-item__text {
-  padding-left: 0.75em;
+  padding-left: 0.75rem;
 }
 
 nav i {
-  max-width: 1.5em;
+  max-width: 1.5rem;
 }
+
+/*****************************************************************************/
+/* MDC overrides
+/*****************************************************************************/
 
 :host(.dark) .mdc-menu::before {
   content: ' ';

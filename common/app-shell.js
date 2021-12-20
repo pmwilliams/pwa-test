@@ -1,28 +1,26 @@
-const title = "Web API Explorer"
+const title = 'Web API Explorer';
 
 const routes = [
   { name: 'Home', path: 'index.html', icon: 'home' },
-  { name: 'Notifications', path: 'pages/notifications/notifications.html', icon: 'notifications'},
-  { name: 'Contacts', path: 'pages/contacts/contacts.html', icon: 'contacts'},
-  { name: 'Share', path: 'pages/share/share.html', icon: 'share'},
-]
+  { name: 'Notifications', path: 'pages/notifications/notifications.html', icon: 'notifications' },
+  { name: 'Contacts', path: 'pages/contacts/contacts.html', icon: 'contacts' },
+  { name: 'Share', path: 'pages/share/share.html', icon: 'share' },
+];
 
-const addLink = (parent, rel, href, onload) => {
+const addLink = (parent, rel, href) => {
   const link = document.createElement('link');
   link.setAttribute('rel', rel);
   link.setAttribute('href', href);
   parent.appendChild(link);
   return link;
-}
+};
 
-const addStylesheet = (parent, href) => {
-  return addLink(parent, 'stylesheet', href);
-}
+const addStylesheet = (parent, href) => addLink(parent, 'stylesheet', href);
 
 class ApplicationShell extends HTMLElement {
   constructor() {
     super();
-    this.shadowDom = this.attachShadow({mode:"open"});    
+    this.shadowDom = this.attachShadow({ mode: 'open' });
     this._apiSummary = [];
     this._alerts = [];
   }
@@ -51,9 +49,9 @@ class ApplicationShell extends HTMLElement {
     this.initTheme();
     this.initTitle();
     this.initNav();
-    this.initDrawer();      
+    this.initDrawer();
     this.initApiSummary();
-    
+
     window.addEventListener('load', () => {
       this.attachDrawer();
       this.attachMenu();
@@ -81,10 +79,10 @@ class ApplicationShell extends HTMLElement {
 
   initDomContent() {
     const relativePath = this.getAttribute('path');
-    addStylesheet(this.shadowDom,"https://unpkg.com/material-components-web@13.0.0/dist/material-components-web.min.css");
+    addStylesheet(this.shadowDom, 'https://unpkg.com/material-components-web@13.0.0/dist/material-components-web.min.css');
     addStylesheet(this.shadowDom, `${relativePath}common/app-shell.css`);
-    addStylesheet(this.shadowDom,"https://fonts.googleapis.com/icon?family=Material+Icons");
-    this.shadowDom.innerHTML = this.shadowDom.innerHTML + html.replace('%relativePath%', relativePath);
+    addStylesheet(this.shadowDom, 'https://fonts.googleapis.com/icon?family=Material+Icons');
+    this.shadowDom.innerHTML += html.replace('%relativePath%', relativePath);
   }
 
   initTitle() {
@@ -101,7 +99,7 @@ class ApplicationShell extends HTMLElement {
   initNav() {
     const relativePath = this.getAttribute('path');
     const nav = this.shadowDom.querySelector('nav');
-    routes.forEach(route => {
+    routes.forEach((route) => {
       const navItemTemplate = this.shadowDom.querySelector('#nav-link');
       const newNavItem = navItemTemplate.content.cloneNode(true);
       const link = newNavItem.querySelector('a');
@@ -115,13 +113,13 @@ class ApplicationShell extends HTMLElement {
       newNavItem.querySelector('.mdc-list-item__graphic').textContent = route.icon;
       newNavItem.querySelector('.mdc-list-item__text').textContent = route.name;
       nav.appendChild(link);
-    })
+    });
   }
 
   initDrawer() {
-    if (window.matchMedia("(max-width: 1200px)").matches) {
-      this.shadowDom.querySelector('.mdc-drawer').classList.add("mdc-drawer--modal");
-    } 
+    if (window.matchMedia('(max-width: 1200px)').matches) {
+      this.shadowDom.querySelector('.mdc-drawer').classList.add('mdc-drawer--modal');
+    }
   }
 
   attachTabs() {
@@ -140,7 +138,9 @@ class ApplicationShell extends HTMLElement {
   attachMenu() {
     this.menu = new window.mdc.menu.MDCMenu(this.shadowDom.querySelector('.mdc-menu'));
     this.menu.setAnchorCorner(window.mdc.menuSurface.Corner.BOTTOM_LEFT);
-    this.shadowDom.querySelector('#menu-button').addEventListener('click', () => this.menu.open = true);
+    this.shadowDom.querySelector('#menu-button').addEventListener('click', () => {
+      this.menu.open = true;
+    });
   }
 
   attachSnackBar() {
@@ -150,19 +150,19 @@ class ApplicationShell extends HTMLElement {
   }
 
   attachDrawer() {
-    this.drawer = window.matchMedia("(max-width: 1200px)").matches ?
-        this.attachModalDrawer() : this.attachPermanentDrawer();
-    
-    const resizeHandler = () => { 
-      if (window.matchMedia("(max-width: 1200px)").matches && this.drawer instanceof window.mdc.list.MDCList) {
+    this.drawer = window.matchMedia('(max-width: 1200px)').matches
+      ? this.attachModalDrawer() : this.attachPermanentDrawer();
+
+    const resizeHandler = () => {
+      if (window.matchMedia('(max-width: 1200px)').matches && this.drawer instanceof window.mdc.list.MDCList) {
         this.drawer.destroy();
         this.drawer = this.attachModalDrawer();
-      } else if (window.matchMedia("(min-width: 1200px)").matches && this.drawer instanceof window.mdc.drawer.MDCDrawer) {
+      } else if (window.matchMedia('(min-width: 1200px)').matches && this.drawer instanceof window.mdc.drawer.MDCDrawer) {
         this.drawer.destroy();
         this.drawer = this.attachPermanentDrawer();
       }
-    }
-    
+    };
+
     window.addEventListener('resize', resizeHandler);
   }
 
@@ -170,7 +170,7 @@ class ApplicationShell extends HTMLElement {
     const listElement = this.shadowDom.querySelector('.mdc-drawer .mdc-list');
     const drawerElement = this.shadowDom.querySelector('.mdc-drawer');
 
-    drawerElement.classList.remove("mdc-drawer--modal");
+    drawerElement.classList.remove('mdc-drawer--modal');
     return new window.mdc.list.MDCList(listElement);
   }
 
@@ -180,45 +180,45 @@ class ApplicationShell extends HTMLElement {
     const drawerElement = this.shadowDom.querySelector('.mdc-drawer');
     const mainContentElement = this.shadowDom.querySelector('main');
 
-    drawerElement.classList.add("mdc-drawer--modal");
+    drawerElement.classList.add('mdc-drawer--modal');
     const drawer = window.mdc.drawer.MDCDrawer.attachTo(drawerElement);
     drawer.open = false;
-    
+
     const topAppBar = window.mdc.topAppBar.MDCTopAppBar.attachTo(topAppBarElement);
     topAppBar.setScrollTarget(mainContentElement);
     topAppBar.listen('MDCTopAppBar:nav', () => {
       drawer.open = !drawer.open;
     });
-  
+
     listElement.addEventListener('click', () => {
       drawer.open = false;
     });
-    
+
     return drawer;
   }
 
   initTheme() {
+    const themeButton = this.shadowDom.querySelector('#theme-button');
     const setLightTheme = () => {
       document.body.classList.remove('dark');
       document.querySelector('application-shell').classList.remove('dark');
       themeButton.textContent = 'dark_mode';
       localStorage.setItem('isDarkTheme', false);
-    }
+    };
     const setDarkTheme = () => {
       document.body.classList.add('dark');
       document.querySelector('application-shell').classList.add('dark');
       themeButton.textContent = 'light_mode';
       localStorage.setItem('isDarkTheme', true);
-    }
+    };
     const toggleTheme = () => {
       const isDarkTheme = localStorage.getItem('isDarkTheme') === 'true';
       if (isDarkTheme) {
-        setLightTheme();  
+        setLightTheme();
       } else {
         setDarkTheme();
       }
-    }
-    const themeButton = this.shadowDom.querySelector('#theme-button');
+    };
     this.shadowDom.querySelector('#theme-button').addEventListener('click', toggleTheme);
     if (localStorage.getItem('isDarkTheme') === 'true') {
       setDarkTheme();
@@ -227,7 +227,7 @@ class ApplicationShell extends HTMLElement {
 
   showNextAlert() {
     if (this.snackbar.isOpen || !this._alerts.length) {
-      return
+      return;
     }
     this.snackbar.labelText = this._alerts.shift();
     this.snackbar.actionButtonText = 'OK';
@@ -236,8 +236,8 @@ class ApplicationShell extends HTMLElement {
 
   initApiSummary() {
     if (this.hasAttribute('api-summary')) {
-      this.shadowDom.querySelector('main').classList.add("show-api-summary");
-      document.body.classList.add("show-api-summary");
+      this.shadowDom.querySelector('main').classList.add('show-api-summary');
+      document.body.classList.add('show-api-summary');
     }
   }
 
@@ -245,17 +245,17 @@ class ApplicationShell extends HTMLElement {
     const listElement = this.shadowDom.querySelector('#api-summary-list');
     listElement.innerHTML = '';
     if (this.apiSummary.length) {
-      this.apiSummary.forEach(group => {
+      this.apiSummary.forEach((group) => {
         const groupElement = document.createElement('div');
-        groupElement.innerHTML = `<h5 class="mdc-list-group__subheader">${group.name}</h5>`
+        groupElement.innerHTML = `<h5 class="mdc-list-group__subheader">${group.name}</h5>`;
         groupElement.classList.add('mdc-list-group');
-        group.items.forEach(feature => {
+        group.items.forEach((feature) => {
           const featureItemTemplate = this.shadowDom.querySelector('#feature-item');
           const featureItem = featureItemTemplate.content.cloneNode(true);
           const listItem = featureItem.querySelector('li');
           listItem.classList.add('mdc-list-item');
           listItem.querySelector('.mdc-list-item__primary-text').textContent = feature.name;
-          const iconElement = listItem.querySelector('.mdc-list-item__graphic') 
+          const iconElement = listItem.querySelector('.mdc-list-item__graphic');
           iconElement.textContent = feature.supported ? 'check_circle' : 'cancel';
           if (!feature.supported) {
             iconElement.classList.add('not-supported');
@@ -372,5 +372,5 @@ const html = `
       </div>
     </div>
   </main>
-`
+`;
 customElements.define('application-shell', ApplicationShell);
