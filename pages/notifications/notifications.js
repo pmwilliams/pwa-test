@@ -16,6 +16,7 @@ const images = {
 };
 
 const notifications = {};
+const closedNotifications = {};
 
 const actions = {
   open: { action: 'open', title: 'Open' },
@@ -31,7 +32,7 @@ const redrawNotifications = () => {
     .forEach((notification) => {
       const existingItem = document.querySelector(`li[data-timestamp="${notification.timestamp}"]`);
       if (existingItem) {
-        if (notification.isClosed) {
+        if (closedNotifications[notification.timestamp]) {
           existingItem.querySelector('.mdc-list-item__graphic i').classList.add('closed');
           existingItem.querySelector('.mdc-list-item__graphic i').textContent = 'notifications_off';
         }
@@ -65,8 +66,9 @@ const mergeNotifications = (toMerge) => {
   );
   Object.values(notifications)
     .filter((notification) => !notification.isLocal && !notification.error)
+    .filter((notification) => Boolean(!toMergeMap[notification.timestamp]))
     .forEach((notification) => {
-      notification.isClosed = Boolean(!toMergeMap[notification.timestamp]);
+      closedNotifications[notification.timestamp] = notification;
     });
   redrawNotifications();
 };
@@ -77,6 +79,67 @@ const showCreateNotification = () => {
 
 const hideCreateNotification = () => {
   document.querySelector('.content').classList.remove('create-notification');
+};
+
+const updateElementDisplay = (parent, selector, show) => {
+  if (show) {
+    parent.querySelector(selector).classList.remove('hide');
+  } else {
+    parent.querySelector(selector).classList.add('hide');
+  }
+};
+
+const updateActionDisplay = (parent, notification, action) => {
+  updateElementDisplay(
+    parent,
+    `.notification-action.${action}`,
+    notification.actions.map((actionItem) => actionItem.action).includes(action),
+  );
+};
+
+const updateMoreInfoDialog = (notification) => {
+  const dialogElement = document.querySelector(`#more-info-dialog[data-timestamp="${notification.timestamp}"]`);
+  if (!dialogElement) {
+    return;
+  }
+  if (notification.action) {
+    dialogElement.querySelector(`.notification-action.${notification.action}`).classList.add('mdc-chip--selected');
+  }
+  if (notification.error) {
+    dialogElement.querySelector('.error-section').textContent = notification.error;
+  } else {
+    dialogElement.querySelector('.error-section').textContent = '';
+  }
+};
+
+const showMoreInfoDialog = (event) => {
+  if (!event.target.classList.contains('notification-more-info')) {
+    return;
+  }
+  const timestamp = event.target.getAttribute('data-timestamp');
+  const dialogElement = document.querySelector('#more-info-dialog');
+  const notification = notifications[timestamp];
+  dialogElement.setAttribute('data-timestamp', notification.timestamp);
+  dialogElement.querySelector('#dialog-title').textContent = notification.title;
+  dialogElement.querySelector('.notification-body').textContent = notification.body;
+  updateElementDisplay(dialogElement, '.notification-tag', notification.tag);
+  if (notification.tag) {
+    dialogElement.querySelector('.notification-tag div').textContent = notification.tag;
+  }
+  updateElementDisplay(dialogElement, '.notification-icon', notification.icon);
+  updateElementDisplay(dialogElement, '.notification-badge', notification.badge);
+  updateElementDisplay(dialogElement, '.notification-image', notification.image);
+  updateElementDisplay(dialogElement, '.notification-silent', notification.silent);
+  updateElementDisplay(dialogElement, '.notification-require-interaction', notification.requireInteraction);
+  updateElementDisplay(dialogElement, '.notification-renotify', notification.renotify);
+  updateElementDisplay(dialogElement, '.notification-dir', notification.dir);
+  dialogElement.querySelector('.notification-dir div').textContent = notification.dir;
+  updateActionDisplay(dialogElement, notification, 'open');
+  updateActionDisplay(dialogElement, notification, 'explore');
+  updateActionDisplay(dialogElement, notification, 'dismiss');
+  updateMoreInfoDialog(notification);
+  const dialog = new MDCDialog(dialogElement);
+  dialog.open();
 };
 
 const onNotificationShow = (type) => app.alert(`${type} notification shown.`);
@@ -96,7 +159,7 @@ const onNotificationClick = (type, action, timestamp) => {
 
 const onNotificationClose = (type, timestamp) => {
   if (timestamp && notifications[timestamp]) {
-    notifications[timestamp].isClosed = true;
+    closedNotifications[timestamp] = notifications[timestamp];
     redrawNotifications();
   }
   app.alert(`${type} notification closed.`);
@@ -178,67 +241,6 @@ navigator.serviceWorker.addEventListener('message', (event) => {
       // Ignore anything else from service worker
   }
 });
-
-const updateElementDisplay = (parent, selector, show) => {
-  if (show) {
-    parent.querySelector(selector).classList.remove('hide');
-  } else {
-    parent.querySelector(selector).classList.add('hide');
-  }
-};
-
-const updateActionDisplay = (parent, notification, action) => {
-  updateElementDisplay(
-    parent,
-    `.notification-action.${action}`,
-    notification.actions.map((actionItem) => actionItem.action).includes(action),
-  );
-};
-
-const updateMoreInfoDialog = (notification) => {
-  const dialogElement = document.querySelector(`#more-info-dialog[data-timestamp="${notification.timestamp}"]`);
-  if (!dialogElement) {
-    return;
-  }
-  if (notification.action) {
-    dialogElement.querySelector(`.notification-action.${notification.action}`).classList.add('mdc-chip--selected');
-  }
-  if (notification.error) {
-    dialogElement.querySelector('.error-section').textContent = notification.error;
-  } else {
-    dialogElement.querySelector('.error-section').textContent = '';
-  }
-};
-
-const showMoreInfoDialog = (event) => {
-  if (!event.target.classList.contains('notification-more-info')) {
-    return;
-  }
-  const timestamp = event.target.getAttribute('data-timestamp');
-  const dialogElement = document.querySelector('#more-info-dialog');
-  const notification = notifications[timestamp];
-  dialogElement.setAttribute('data-timestamp', notification.timestamp);
-  dialogElement.querySelector('#dialog-title').textContent = notification.title;
-  dialogElement.querySelector('.notification-body').textContent = notification.body;
-  updateElementDisplay(dialogElement, '.notification-tag', notification.tag);
-  if (notification.tag) {
-    dialogElement.querySelector('.notification-tag div').textContent = notification.tag;
-  }
-  updateElementDisplay(dialogElement, '.notification-icon', notification.icon);
-  updateElementDisplay(dialogElement, '.notification-badge', notification.badge);
-  updateElementDisplay(dialogElement, '.notification-image', notification.image);
-  updateElementDisplay(dialogElement, '.notification-silent', notification.silent);
-  updateElementDisplay(dialogElement, '.notification-require-interaction', notification.requireInteraction);
-  updateElementDisplay(dialogElement, '.notification-renotify', notification.renotify);
-  updateElementDisplay(dialogElement, '.notification-dir', notification.dir);
-  dialogElement.querySelector('.notification-dir div').textContent = notification.dir;
-  updateActionDisplay(dialogElement, notification, 'open');
-  updateActionDisplay(dialogElement, notification, 'explore');
-  updateActionDisplay(dialogElement, notification, 'dismiss');
-  updateMoreInfoDialog(notification);
-  const dialog = new MDCDialog(dialogElement);
-  dialog.open();
-};
 
 document.querySelector('#notifications').addEventListener('click', showMoreInfoDialog);
 document.querySelector('#notify-button').addEventListener('click', () => notify());
