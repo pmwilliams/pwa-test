@@ -10,7 +10,7 @@ h5 {
 #notifications {
   position: relative;
   width: 100%;
-  max-width: 100%
+  max-width: 100%;
 }
 
 #notifications .no-notifications {
@@ -50,7 +50,7 @@ h5 {
 }
 
 .dark #notifications .no-notifications i {
-  opacity: 1.0;
+  opacity: 1;
 }
 
 #notifications .no-notifications h3 {
@@ -228,7 +228,7 @@ h5 {
   text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;  
+  -webkit-box-orient: vertical;
 }
 
 #more-info-dialog .error-section {

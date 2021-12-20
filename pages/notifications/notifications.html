@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-  
   <head>
     <meta charset="utf-8" />
-    <meta name="description" content="Demonstration of web Notifications API.">
-    <link rel="stylesheet" href="../../style.css">
-    <link rel="stylesheet" href="notifications.css">  
+    <meta name="description" content="Demonstration of web Notifications API." />
+    <link rel="stylesheet" href="../../style.css" />
+    <link rel="stylesheet" href="notifications.css" />
     <script src="../../common/app-shell.js"></script>
     <script defer src="https://unpkg.com/material-components-web@13.0.0/dist/material-components-web.min.js"></script>
     <script defer src="notifications.js" type="module"></script>
@@ -20,8 +19,10 @@
       <span class="mdc-list-item__text notification-content">
         <div class="mdc-list-item__secondary-text notification-title"></div>
         <div class="mdc-list-item__secondary-text notification-body"></div>
-        <span class="mdc-list-item__secondary-text"><span class="notification-source"></span>
-          <a class="notification-more-info" href="javascript:void(0)">(more info)</a></span>
+        <span class="mdc-list-item__secondary-text"
+          ><span class="notification-source"></span>
+          <a class="notification-more-info" href="javascript:void(0)">(more info)</a></span
+        >
       </span>
     </li>
   </template>
@@ -36,9 +37,7 @@
         <div id="notifications">
           <ul class="mdc-list mdc-list--two-line" data-mdc-auto-init="MDCList"></ul>
           <div class="no-notifications">
-            <i class="material-icons">
-              notifications_active
-            </i>
+            <i class="material-icons"> notifications_active </i>
             <h3>Nothing to see</h3>
             <div class="tagline mdc-typography--body">Create a notification and it will show up here.</div>
           </div>
@@ -51,53 +50,72 @@
           <div class="mdc-layout-grid">
             <div class="mdc-layout-grid__inner">
               <div
-                class="mdc-layout-grid__cell--span-7-desktop mdc-layout-grid__cell--span-4-phone mdc-layout-grid__cell--span-5-tablet">
-                <h5>Content</h4>
-                  <label class="mdc-text-field mdc-text-field--filled" data-mdc-auto-init="MDCTextField">
-                    <span class="mdc-text-field__ripple"></span>
-                    <span class="mdc-floating-label" id="notification-title-label">Title</span>
-                    <input class="mdc-text-field__input" id="notification-title" value="Reminder" type="text"
-                      aria-labelledby="notification-title-label" aria-controls="notifiction-title-helper"
-                      aria-describedby="notifiction-title-helper"
-                      maxlength="20">
-                    <span class="mdc-line-ripple"></span>
-                  </label>
-                  <div class="mdc-text-field-helper-line">
-                    <div class="mdc-text-field-helper-text" id="notifiction-title-helper" aria-hidden="true">
-                      Notification title
-                    </div>
+                class="mdc-layout-grid__cell--span-7-desktop mdc-layout-grid__cell--span-4-phone mdc-layout-grid__cell--span-5-tablet"
+              >
+                <h5>Content</h5>
+                <label class="mdc-text-field mdc-text-field--filled" data-mdc-auto-init="MDCTextField">
+                  <span class="mdc-text-field__ripple"></span>
+                  <span class="mdc-floating-label" id="notification-title-label">Title</span>
+                  <input
+                    class="mdc-text-field__input"
+                    id="notification-title"
+                    value="Reminder"
+                    type="text"
+                    aria-labelledby="notification-title-label"
+                    aria-controls="notifiction-title-helper"
+                    aria-describedby="notifiction-title-helper"
+                    maxlength="20"
+                  />
+                  <span class="mdc-line-ripple"></span>
+                </label>
+                <div class="mdc-text-field-helper-line">
+                  <div class="mdc-text-field-helper-text" id="notifiction-title-helper" aria-hidden="true">
+                    Notification title
                   </div>
-                  <label class="mdc-text-field mdc-text-field--filled" data-mdc-auto-init="MDCTextField">
-                    <span class="mdc-text-field__ripple"></span>
-                    <span class="mdc-floating-label" id="notification-content-label">Body</span>
-                    <input class="mdc-text-field__input" id="notification-content" value="Your library books are overdue, please return them to your local library to avoid hefty fines."
-                      type="text" aria-labelledby="notification-content-label" aria-controls="notifiction-content-helper"
-                      aria-describedby="notifiction-content-helper"
-                      maxlength="100">
-                    <span class="mdc-line-ripple"></span>
-                  </label>
-                  <div class="mdc-text-field-helper-line">
-                    <div class="mdc-text-field-helper-text" id="notifiction-content-helper" aria-hidden="true">
-                      Notification body
-                    </div>
+                </div>
+                <label class="mdc-text-field mdc-text-field--filled" data-mdc-auto-init="MDCTextField">
+                  <span class="mdc-text-field__ripple"></span>
+                  <span class="mdc-floating-label" id="notification-content-label">Body</span>
+                  <input
+                    class="mdc-text-field__input"
+                    id="notification-content"
+                    value="Your library books are overdue, please return them to your local library to avoid hefty fines."
+                    type="text"
+                    aria-labelledby="notification-content-label"
+                    aria-controls="notifiction-content-helper"
+                    aria-describedby="notifiction-content-helper"
+                    maxlength="100"
+                  />
+                  <span class="mdc-line-ripple"></span>
+                </label>
+                <div class="mdc-text-field-helper-line">
+                  <div class="mdc-text-field-helper-text" id="notifiction-content-helper" aria-hidden="true">
+                    Notification body
                   </div>
-                  <label class="mdc-text-field mdc-text-field--filled" data-mdc-auto-init="MDCTextField">
-                    <span class="mdc-text-field__ripple"></span>
-                    <span class="mdc-floating-label" id="notification-tag-label">Tag</span>
-                    <input class="mdc-text-field__input" id="notification-tag" type="text"
-                      aria-labelledby="notification-tag-label" aria-controls="notifiction-tag-helper"
-                      aria-describedby="notifiction-tag-helper"
-                      maxlength="4">
-                    <span class="mdc-line-ripple"></span>
-                  </label>
-                  <div class="mdc-text-field-helper-line">
-                    <div class="mdc-text-field-helper-text" id="notifiction-tag-helper" aria-hidden="true">
-                      Notification tag
-                    </div>
+                </div>
+                <label class="mdc-text-field mdc-text-field--filled" data-mdc-auto-init="MDCTextField">
+                  <span class="mdc-text-field__ripple"></span>
+                  <span class="mdc-floating-label" id="notification-tag-label">Tag</span>
+                  <input
+                    class="mdc-text-field__input"
+                    id="notification-tag"
+                    type="text"
+                    aria-labelledby="notification-tag-label"
+                    aria-controls="notifiction-tag-helper"
+                    aria-describedby="notifiction-tag-helper"
+                    maxlength="4"
+                  />
+                  <span class="mdc-line-ripple"></span>
+                </label>
+                <div class="mdc-text-field-helper-line">
+                  <div class="mdc-text-field-helper-text" id="notifiction-tag-helper" aria-hidden="true">
+                    Notification tag
                   </div>
+                </div>
               </div>
               <div
-                class="mdc-layout-grid__cell--span-5-desktop mdc-layout-grid__cell--span-4-phone mdc-layout-grid__cell--span-3-tablet">
+                class="mdc-layout-grid__cell--span-5-desktop mdc-layout-grid__cell--span-4-phone mdc-layout-grid__cell--span-3-tablet"
+              >
                 <h5>Icon</h5>
                 <div id="icon-chipset" class="mdc-chip-set mdc-chip-set--choice" data-mdc-auto-init="MDCChipSet">
                   <div class="mdc-chip mdc-chip--selected" tabindex="0" data-value="cloud">
@@ -106,7 +124,7 @@
                   <div class="mdc-chip" tabindex="0" data-value="favorite">
                     <i class="material-icons mdc-button__icon" aria-hidden="true">favorite</i>
                   </div>
-                  <div class=" mdc-chip" tabindex="0" data-value="thumb_up">
+                  <div class="mdc-chip" tabindex="0" data-value="thumb_up">
                     <i class="material-icons mdc-button__icon" aria-hidden="true">thumb_up</i>
                   </div>
                 </div>
@@ -136,7 +154,8 @@
                 </div>
               </div>
               <div
-                class="mdc-layout-grid__cell--span-7-desktop mdc-layout-grid__cell--span-4-phone mdc-layout-grid__cell--span-5-tablet">
+                class="mdc-layout-grid__cell--span-7-desktop mdc-layout-grid__cell--span-4-phone mdc-layout-grid__cell--span-5-tablet"
+              >
                 <h5>Actions</h5>
                 <div id="actions-chipset" class="mdc-chip-set mdc-chip-set--filter" data-mdc-auto-init="MDCChipSet">
                   <div class="mdc-chip mdc-chip--selected" tabindex="0" data-value="open">
@@ -155,8 +174,13 @@
                 <h5>Notify with</h5>
                 <div class="mdc-form-field">
                   <div class="mdc-radio" data-mdc-auto-init="MDCRadio">
-                    <input id="new-notification-radio" class="mdc-radio__native-control" type="radio" id="radio-1"
-                      name="radios">
+                    <input
+                      id="new-notification-radio"
+                      class="mdc-radio__native-control"
+                      type="radio"
+                      id="radio-1"
+                      name="radios"
+                    />
                     <div class="mdc-radio__background">
                       <div class="mdc-radio__outer-circle"></div>
                       <div class="mdc-radio__inner-circle"></div>
@@ -165,11 +189,17 @@
                   </div>
                   <label for="radio-1">new Notification()</label>
                 </div>
-                <br>
+                <br />
                 <div class="mdc-form-field">
                   <div class="mdc-radio" data-mdc-auto-init="MDCRadio">
-                    <input id="show-notification-radio" class="mdc-radio__native-control" type="radio" id="radio-1"
-                      name="radios" checked>
+                    <input
+                      id="show-notification-radio"
+                      class="mdc-radio__native-control"
+                      type="radio"
+                      id="radio-1"
+                      name="radios"
+                      checked
+                    />
                     <div class="mdc-radio__background">
                       <div class="mdc-radio__outer-circle"></div>
                       <div class="mdc-radio__inner-circle"></div>
@@ -180,7 +210,8 @@
                 </div>
               </div>
               <div
-                class="mdc-layout-grid__cell--span-5-desktop mdc-layout-grid__cell--span-4-phone mdc-layout-grid__cell--span-3-tablet">
+                class="mdc-layout-grid__cell--span-5-desktop mdc-layout-grid__cell--span-4-phone mdc-layout-grid__cell--span-3-tablet"
+              >
                 <h5>Direction</h5>
                 <div id="direction-chipset" class="mdc-chip-set mdc-chip-set--choice" data-mdc-auto-init="MDCChipSet">
                   <div class="mdc-chip mdc-chip--selected" tabindex="0" data-value="auto">
@@ -207,7 +238,7 @@
                   </div>
                   <label for="checkbox-1">Silent</label>
                 </div>
-                <br>
+                <br />
                 <div class="mdc-form-field">
                   <div class="mdc-checkbox" data-mdc-auto-init="MDCCheckbox">
                     <input id="require-interaction-checkbox" type="checkbox" class="mdc-checkbox__native-control" />
@@ -221,7 +252,7 @@
                   </div>
                   <label for="checkbox-1">Require Interaction</label>
                 </div>
-                <br>
+                <br />
                 <div class="mdc-form-field">
                   <div class="mdc-checkbox" data-mdc-auto-init="MDCCheckbox">
                     <input id="renotify-checkbox" type="checkbox" class="mdc-checkbox__native-control" />
@@ -239,7 +270,11 @@
             </div>
             <div class="mdc-layout-grid__inner">
               <div class="mdc-layout-grid__cell--span-12">
-                <button class="mdc-button mdc-button--raised mdc-button--leading" id="notify-button" data-mdc-auto-init="MDCRipple">
+                <button
+                  class="mdc-button mdc-button--raised mdc-button--leading"
+                  id="notify-button"
+                  data-mdc-auto-init="MDCRipple"
+                >
                   <span class="mdc-button__ripple"></span>
                   <i class="material-icons mdc-button__icon" aria-hidden="true">notifications_active</i>
                   <span class="mdc-button__label">Notify</span>
@@ -252,18 +287,20 @@
     </application-shell>
     <div id="more-info-dialog" class="mdc-dialog">
       <div class="mdc-dialog__container">
-        <div class="mdc-dialog__surface"
+        <div
+          class="mdc-dialog__surface"
           role="alertdialog"
           aria-modal="true"
           aria-labelledby="dialog-title"
-          aria-describedby="dialog-content">
+          aria-describedby="dialog-content"
+        >
           <div class="mdc-dialog__title" id="dialog-title"></div>
           <div class="mdc-dialog__content" id="dialog-content">
             <div class="notification-body"></div>
           </div>
           <div class="scroller">
             <div class="mdc-dialog__content" id="dialog-settings">
-              <section class="mdc-typography--body2 error-section"></section>   
+              <section class="mdc-typography--body2 error-section"></section>
               <section>
                 <div class="setting notification-tag">
                   tag

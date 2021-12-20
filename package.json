@@ -6,6 +6,7 @@
   "scripts": {
     "start": "http-server",
     "lint": "eslint **/*.js",
+    "prettier": "prettier --write ./",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -14,5 +15,9 @@
     "eslint": "^8.4.1",
     "eslint-config-airbnb": "^19.0.2",
     "http-server": "^13.0.1"
+  },
+  "devDependencies": {
+    "eslint-config-prettier": "^8.3.0",
+    "prettier": "2.5.1"
   }
 }

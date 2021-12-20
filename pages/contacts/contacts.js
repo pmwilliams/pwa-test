@@ -1,6 +1,4 @@
-import {
-  initPage,
-} from '../../common/init-page.js';
+import { initPage } from '../../common/init-page.js';
 
 const MAX_VISIBLE_CONTACTS = 20;
 
@@ -45,13 +43,22 @@ const onFabClick = async () => {
   if (!navigator.contacts) {
     drawContacts([
       {
-        address: ['address'], email: ['bob@bob.com'], name: ['Bob'], tel: ['tel'],
+        address: ['address'],
+        email: ['bob@bob.com'],
+        name: ['Bob'],
+        tel: ['tel'],
       },
       {
-        address: [], email: [], name: ['Steve'], tel: ['234 232 3232'],
+        address: [],
+        email: [],
+        name: ['Steve'],
+        tel: ['234 232 3232'],
       },
       {
-        address: ['address2'], email: ['bill@bob.com'], name: ['Harry'], tel: ['tel2'],
+        address: ['address2'],
+        email: ['bill@bob.com'],
+        name: ['Harry'],
+        tel: ['tel2'],
       },
     ]);
   } else {
@@ -72,15 +79,11 @@ const getApi = async () => {
   return [
     {
       name: 'window',
-      items: [
-        { name: 'ContactsManager', supported: isContactsManagerSupported() },
-      ],
+      items: [{ name: 'ContactsManager', supported: isContactsManagerSupported() }],
     },
     {
       name: 'navigator',
-      items: [
-        { name: '.contacts', supported: isContactsSupported() },
-      ],
+      items: [{ name: '.contacts', supported: isContactsSupported() }],
     },
     {
       name: 'contacts.supportedProperties',

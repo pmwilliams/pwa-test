@@ -187,7 +187,10 @@ class ApplicationShell extends HTMLElement {
 
   initDomContent() {
     const relativePath = this.getAttribute('path');
-    addStylesheet(this.shadowDom, 'https://unpkg.com/material-components-web@13.0.0/dist/material-components-web.min.css');
+    addStylesheet(
+      this.shadowDom,
+      'https://unpkg.com/material-components-web@13.0.0/dist/material-components-web.min.css'
+    );
     addStylesheet(this.shadowDom, `${relativePath}common/app-shell.css`);
     addStylesheet(this.shadowDom, 'https://fonts.googleapis.com/icon?family=Material+Icons');
     this.shadowDom.innerHTML += pageContent;
@@ -259,13 +262,17 @@ class ApplicationShell extends HTMLElement {
 
   attachDrawer() {
     this.drawer = window.matchMedia('(max-width: 1200px)').matches
-      ? this.attachModalDrawer() : this.attachPermanentDrawer();
+      ? this.attachModalDrawer()
+      : this.attachPermanentDrawer();
 
     const resizeHandler = () => {
       if (window.matchMedia('(max-width: 1200px)').matches && this.drawer instanceof window.mdc.list.MDCList) {
         this.drawer.destroy();
         this.drawer = this.attachModalDrawer();
-      } else if (window.matchMedia('(min-width: 1200px)').matches && this.drawer instanceof window.mdc.drawer.MDCDrawer) {
+      } else if (
+        window.matchMedia('(min-width: 1200px)').matches &&
+        this.drawer instanceof window.mdc.drawer.MDCDrawer
+      ) {
         this.drawer.destroy();
         this.drawer = this.attachPermanentDrawer();
       }

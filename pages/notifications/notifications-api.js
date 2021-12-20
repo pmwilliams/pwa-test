@@ -24,12 +24,10 @@ const isTitleSupported = () => Notification.prototype.hasOwnProperty('title');
 const isVibrateSupported = () => Notification.prototype.hasOwnProperty('vibrate');
 const isShowNotificationSupported = () => ServiceWorkerRegistration.prototype.hasOwnProperty('showNotification');
 
-const getApi = () => ([
+const getApi = () => [
   {
     name: 'window',
-    items: [
-      { name: 'Notification', supported: isNotificationSupported() },
-    ],
+    items: [{ name: 'Notification', supported: isNotificationSupported() }],
   },
   {
     name: 'Notification',
@@ -61,11 +59,9 @@ const getApi = () => ([
   },
   {
     name: 'ServiceWorkerRegistration',
-    items: [
-      { name: '.showNotification()', supported: isShowNotificationSupported() },
-    ],
+    items: [{ name: '.showNotification()', supported: isShowNotificationSupported() }],
   },
-]);
+];
 
 const app = document.querySelector('application-shell');
 app.apiSummary = getApi();

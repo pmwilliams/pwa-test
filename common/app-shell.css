@@ -7,7 +7,7 @@
 }
 
 :host(.dark) *::-webkit-scrollbar-track {
-  background: rgba(255,255,255,0.05);
+  background: rgba(255, 255, 255, 0.05);
 }
 
 :host(.dark) *::-webkit-scrollbar-thumb {
@@ -15,16 +15,14 @@
 }
 
 :host(.dark) .mdc-top-app-bar {
-  background-color: rgba(255,255,255,0.05);
+  background-color: rgba(255, 255, 255, 0.05);
 }
 
-:host(.dark) .mdc-drawer
-{
-  background-color: rgba(255,255,255,0.07);
+:host(.dark) .mdc-drawer {
+  background-color: rgba(255, 255, 255, 0.07);
 }
 
-:host(.dark) .mdc-drawer--modal
-{
+:host(.dark) .mdc-drawer--modal {
   background-color: #121212;
 }
 
@@ -123,7 +121,7 @@ main {
   font-family: 'Courier New', Courier, monospace;
   font-size: 0.75rem;
 }
- 
+
 .api-summary .mdc-list-group h5 {
   font-family: 'Courier New', Courier, monospace;
   font-size: 0.85rem;
@@ -194,13 +192,13 @@ nav i {
 }
 
 :host(.dark) .mdc-tab-bar {
-  background-color: rgba(255,255,255,0.05);
+  background-color: rgba(255, 255, 255, 0.05);
   box-shadow: none;
 }
 
 .mdc-tab .mdc-tab__icon,
 .mdc-tab .mdc-tab__text-label {
-  color: rgba(255, 255, 255, 0.60);
+  color: rgba(255, 255, 255, 0.6);
 }
 
 .mdc-tab--active .mdc-tab__icon,

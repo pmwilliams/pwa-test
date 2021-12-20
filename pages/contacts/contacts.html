@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8"/>
-    <link rel="stylesheet" href="../../style.css">
-    <link rel="stylesheet" href="contacts.css">
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../style.css" />
+    <link rel="stylesheet" href="contacts.css" />
     <script src="../../common/app-shell.js"></script>
     <script defer src="https://unpkg.com/material-components-web@13.0.0/dist/material-components-web.min.js"></script>
     <script src="contacts.js" type="module"></script>
@@ -12,7 +12,7 @@
   <template id="contact-item">
     <li tabindex="0" class="mdc-list-item">
       <span class="mdc-list-item__graphic contact-graphic">
-        <img class="contact-icon" src="../../images/icon-256.png"/>
+        <img class="contact-icon" src="../../images/icon-256.png" />
       </span>
       <span class="mdc-list-item__text contact-content">
         <div class="mdc-list-item__secondary-text contact-name"></div>
@@ -33,14 +33,12 @@
         <div id="contacts">
           <ul class="mdc-list mdc-list--two-line" data-mdc-auto-init="MDCList"></ul>
           <div class="no-contacts">
-            <i class="material-icons">
-              contacts
-            </i>
+            <i class="material-icons"> contacts </i>
             <h3>Nothing to see</h3>
             <div class="tagline mdc-typography--body">Add contacts and they will appear here.</div>
           </div>
         </div>
-      </div>            
+      </div>
     </application-shell>
   </body>
-</html> 
+</html>

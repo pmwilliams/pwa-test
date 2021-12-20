@@ -1,6 +1,6 @@
-@import url("https://unpkg.com/material-components-web@13.0.0/dist/material-components-web.min.css");
-@import url("common/app-shell.css");
-@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+@import url('https://unpkg.com/material-components-web@13.0.0/dist/material-components-web.min.css');
+@import url('common/app-shell.css');
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 
 body {
   background: var(--mdc-theme-background);
@@ -20,7 +20,7 @@ body.dark {
   --mdc-theme-surface: #121212;
   --mdc-theme-on-surface: white;
   --mdc-theme-on-surface-high-emphasis: rgba(255, 255, 255, 0.87);
-  --mdc-theme-on-surface-medium-emphasis: rgba(255, 255, 255, 0.60);
+  --mdc-theme-on-surface-medium-emphasis: rgba(255, 255, 255, 0.6);
   --mdc-theme-on-background: white;
   --mdc-theme-on-primary: #000000;
   --mdc-theme-on-secondary: #000000;
@@ -34,15 +34,15 @@ body.dark {
 }
 
 .dark *::-webkit-scrollbar {
-  width: inherit;             /* width of the entire scrollbar */
+  width: inherit; /* width of the entire scrollbar */
 }
 
 .dark *::-webkit-scrollbar-track {
-  background: rgba(255,255,255,0.05);        /* color of the tracking area */
+  background: rgba(255, 255, 255, 0.05); /* color of the tracking area */
 }
 
 .dark *::-webkit-scrollbar-thumb {
-  background-color: rgba(255, 255, 255, 0.12);    /* color of the scroll thumb */
+  background-color: rgba(255, 255, 255, 0.12); /* color of the scroll thumb */
 }
 
 application-shell {
@@ -73,7 +73,7 @@ application-shell {
   display: flex;
   align-items: center;
   background-color: #fff;
-  padding: 0.4em 0.75em 0.4em 0.4em; 
+  padding: 0.4em 0.75em 0.4em 0.4em;
 }
 
 .dark .activity-heading {
@@ -102,7 +102,7 @@ application-shell {
 }
 
 .mdc-chip {
-  background-color: rgba(21,21,21,0.08);
+  background-color: rgba(21, 21, 21, 0.08);
 }
 
 .mdc-chip i {
@@ -116,15 +116,15 @@ application-shell {
 }
 
 .dark .mdc-chip i {
-  color: var(--mdc-theme-on-surface-high-emphasis)
+  color: var(--mdc-theme-on-surface-high-emphasis);
 }
 
 .mdc-chip:hover {
-  background-color: rgba(21,21,21,0.12);
+  background-color: rgba(21, 21, 21, 0.12);
 }
 
 .mdc-chip:focus {
-  background-color: rgba(21,21,21,0.16);
+  background-color: rgba(21, 21, 21, 0.16);
 }
 
 .dark .mdc-chip:hover {
@@ -150,7 +150,7 @@ application-shell {
   color: var(--mdc-theme-primary);
 }
 
-.dark .mdc-radio .mdc-radio__native-control:enabled:not(:checked)+.mdc-radio__background .mdc-radio__outer-circle {
+.dark .mdc-radio .mdc-radio__native-control:enabled:not(:checked) + .mdc-radio__background .mdc-radio__outer-circle {
   border-color: var(--mdc-theme-on-surface-medium-emphasis);
 }
 

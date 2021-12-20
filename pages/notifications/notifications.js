@@ -1,7 +1,4 @@
-import {
-  initPage,
-  MDCDialog,
-} from '../../common/init-page.js';
+import { initPage, MDCDialog } from '../../common/init-page.js';
 
 const MAX_VISIBLE_NOTIFICATIONS = 20;
 
@@ -65,9 +62,7 @@ const mergeNotifications = (toMerge) => {
   toMerge.forEach((notification) => {
     notifications[notification.timestamp] = notification;
   });
-  const toMergeMap = Object.fromEntries(
-    toMerge.map((notification) => [notification.timestamp, notification]),
-  );
+  const toMergeMap = Object.fromEntries(toMerge.map((notification) => [notification.timestamp, notification]));
   Object.values(notifications)
     .filter((notification) => !notification.isLocal && !notification.error)
     .filter((notification) => Boolean(!toMergeMap[notification.timestamp]))
@@ -97,7 +92,7 @@ const updateActionDisplay = (parent, notification, action) => {
   updateElementDisplay(
     parent,
     `.notification-action.${action}`,
-    notification.actions.map((actionItem) => actionItem.action).includes(action),
+    notification.actions.map((actionItem) => actionItem.action).includes(action)
   );
 };
 
@@ -175,7 +170,10 @@ const onNotificationClose = (type, timestamp) => {
 const onNotificationError = (title, options, error) => {
   const timestamp = new Date().getTime();
   notifications[timestamp] = {
-    title, timestamp, error, ...options,
+    title,
+    timestamp,
+    error,
+    ...options,
   };
   app.alert('An exception was thrown. Check notification list for details.');
 };
@@ -194,8 +192,9 @@ const notify = () => {
       const silentCheckbox = document.querySelector('#silent-checkbox');
       const requireInteractionCheckbox = document.querySelector('#require-interaction-checkbox');
       const renotifyCheckbox = document.querySelector('#renotify-checkbox');
-      const selectedActions = [...document.querySelectorAll('#actions-chipset .mdc-chip--selected')]
-        .map((element) => actions[element.getAttribute('data-value')]);
+      const selectedActions = [...document.querySelectorAll('#actions-chipset .mdc-chip--selected')].map(
+        (element) => actions[element.getAttribute('data-value')]
+      );
       const title = titleTextField.value;
       const options = {
         tag: tagTextField.value,
@@ -212,7 +211,8 @@ const notify = () => {
       if (newNotificationRadio.checked) {
         try {
           const notification = new Notification(title, options);
-          notification.onclick = (event) => onNotificationClick('Local', event.data?.action, event.data?.notification.timestamp);
+          notification.onclick = (event) =>
+            onNotificationClick('Local', event.data?.action, event.data?.notification.timestamp);
           notification.onshow = () => onNotificationShow('Local');
           notification.onclose = (event) => onNotificationClose('Local', event.target.timestamp);
           notification.isLocal = true;
@@ -222,13 +222,10 @@ const notify = () => {
         }
         redrawNotifications();
       } else {
-        navigator.serviceWorker.ready
-          .then((registration) => {
-            registration.showNotification(title, options)
-              .catch((error) => onNotificationError(title, options, error));
-            setTimeout(() => registration.getNotifications()
-              .then(mergeNotifications), 200);
-          });
+        navigator.serviceWorker.ready.then((registration) => {
+          registration.showNotification(title, options).catch((error) => onNotificationError(title, options, error));
+          setTimeout(() => registration.getNotifications().then(mergeNotifications), 200);
+        });
       }
     }
   });
@@ -245,7 +242,7 @@ navigator.serviceWorker.addEventListener('message', (event) => {
       onNotificationClose('Service Worker', event.data.timestamp);
       break;
     default:
-      // Ignore anything else from service worker
+    // Ignore anything else from service worker
   }
 });
 

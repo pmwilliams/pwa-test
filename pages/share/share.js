@@ -1,5 +1,3 @@
-import {
-  initPage,
-} from '../../common/init-page.js';
+import { initPage } from '../../common/init-page.js';
 
 initPage('../../');

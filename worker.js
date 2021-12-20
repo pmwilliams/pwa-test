@@ -24,38 +24,42 @@ const filesToCache = [
 ];
 
 self.addEventListener('install', (e) => {
-  e.waitUntil(
-    caches.open(cacheName).then((cache) => cache.addAll(filesToCache)),
-  );
+  e.waitUntil(caches.open(cacheName).then((cache) => cache.addAll(filesToCache)));
 });
 
 self.addEventListener('fetch', (e) => {
   e.respondWith(
-    caches.open(cacheName)
-      .then((cache) => cache.match(e.request)
-        .then((response) => response || fetch(e.request))),
+    caches.open(cacheName).then((cache) => cache.match(e.request).then((response) => response || fetch(e.request)))
   );
 });
 
 self.addEventListener('notificationclick', (event) => {
-  event.waitUntil(clients.matchAll({ includeUncontrolled: true }).then((r) => {
-    r.forEach((client) => client.postMessage({
-      type: 'notificationclick',
-      action: event.action,
-      timestamp: event.notification.timestamp,
-    }));
-    if (event.action === 'dismiss') {
-      event.notification.close();
-    }
-  }));
+  event.waitUntil(
+    clients.matchAll({ includeUncontrolled: true }).then((r) => {
+      r.forEach((client) =>
+        client.postMessage({
+          type: 'notificationclick',
+          action: event.action,
+          timestamp: event.notification.timestamp,
+        })
+      );
+      if (event.action === 'dismiss') {
+        event.notification.close();
+      }
+    })
+  );
 });
 
 self.addEventListener('notificationclose', (event) => {
-  event.waitUntil(clients.matchAll({ includeUncontrolled: true }).then((r) => {
-    r.forEach((client) => client.postMessage({
-      type: 'notificationclose',
-      action: event.action,
-      timestamp: event.notification.timestamp,
-    }));
-  }));
+  event.waitUntil(
+    clients.matchAll({ includeUncontrolled: true }).then((r) => {
+      r.forEach((client) =>
+        client.postMessage({
+          type: 'notificationclose',
+          action: event.action,
+          timestamp: event.notification.timestamp,
+        })
+      );
+    })
+  );
 });

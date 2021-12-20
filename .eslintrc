@@ -1,14 +1,14 @@
 {
-    "extends": "airbnb",
-    "rules": {
-        "no-underscore-dangle": ["error", { "allowAfterThis": true }],
-        "no-prototype-builtins": "off",
-        "import/extensions": "off"
-    },
-    "env": {
-        "browser": true
-    },
-    "parserOptions": {
-        "ecmaVersion": 2020
-    }
+  "extends": ["airbnb", "prettier"],
+  "rules": {
+    "no-underscore-dangle": ["error", { "allowAfterThis": true }],
+    "no-prototype-builtins": "off",
+    "import/extensions": "off"
+  },
+  "env": {
+    "browser": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 2020
   }
+}
