@@ -7,7 +7,8 @@
     "start": "http-server",
     "lint": "eslint **/*.js",
     "prettier": "prettier --write ./",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "husky install"
   },
   "author": "",
   "license": "ISC",
@@ -18,6 +19,12 @@
   },
   "devDependencies": {
     "eslint-config-prettier": "^8.3.0",
+    "husky": "^7.0.4",
+    "lint-staged": "^12.1.3",
     "prettier": "2.5.1"
+  },
+  "lint-staged": {
+    "*.{js,css,md}": "prettier --write",
+    "*.{js}": "eslint"
   }
 }
