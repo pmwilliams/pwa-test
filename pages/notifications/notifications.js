@@ -9,11 +9,15 @@ initPage('../../');
 
 const app = document.querySelector('application-shell');
 
+const IMAGE_PREFIX = 'https://raw.githubusercontent.com/google/material-design-icons/master/png';
+
 const images = {
-  cloud: 'https://raw.githubusercontent.com/google/material-design-icons/master/png/file/cloud/materialiconsoutlined/48dp/2x/outline_cloud_black_48dp.png',
-  favorite: 'https://raw.githubusercontent.com/google/material-design-icons/master/png/action/favorite_border/materialiconsoutlined/48dp/2x/outline_favorite_border_black_48dp.png',
-  thumb_up: 'https://raw.githubusercontent.com/google/material-design-icons/master/png/action/thumb_up/materialiconsoutlined/48dp/2x/outline_thumb_up_black_48dp.png',
+  cloud: `${IMAGE_PREFIX}/file/cloud/materialiconsoutlined/48dp/2x/outline_cloud_black_48dp.png`,
+  favorite: `${IMAGE_PREFIX}/action/favorite_border/materialiconsoutlined/48dp/2x/outline_favorite_border_black_48dp.png`,
+  thumb_up: `${IMAGE_PREFIX}/action/thumb_up/materialiconsoutlined/48dp/2x/outline_thumb_up_black_48dp.png`,
 };
+
+const imageLookup = Object.fromEntries(Object.entries(images).map(([value, key]) => [key, value]));
 
 const notifications = {};
 const closedNotifications = {};
@@ -127,8 +131,11 @@ const showMoreInfoDialog = (event) => {
     dialogElement.querySelector('.notification-tag div').textContent = notification.tag;
   }
   updateElementDisplay(dialogElement, '.notification-icon', notification.icon);
+  dialogElement.querySelector('.notification-icon i').textContent = imageLookup[notification.icon];
   updateElementDisplay(dialogElement, '.notification-badge', notification.badge);
+  dialogElement.querySelector('.notification-badge i').textContent = imageLookup[notification.badge];
   updateElementDisplay(dialogElement, '.notification-image', notification.image);
+  dialogElement.querySelector('.notification-image i').textContent = imageLookup[notification.image];
   updateElementDisplay(dialogElement, '.notification-silent', notification.silent);
   updateElementDisplay(dialogElement, '.notification-require-interaction', notification.requireInteraction);
   updateElementDisplay(dialogElement, '.notification-renotify', notification.renotify);
