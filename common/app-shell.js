@@ -17,7 +17,9 @@ const addLink = (parent, rel, href) => {
 
 const addStylesheet = (parent, href) => addLink(parent, 'stylesheet', href);
 
-const html = `
+const html = (strings) => strings.join('');
+
+const pageContent = html`
   <template id="nav-link">
     <a>
       <span class="mdc-list-item__ripple"></span>
@@ -188,7 +190,7 @@ class ApplicationShell extends HTMLElement {
     addStylesheet(this.shadowDom, 'https://unpkg.com/material-components-web@13.0.0/dist/material-components-web.min.css');
     addStylesheet(this.shadowDom, `${relativePath}common/app-shell.css`);
     addStylesheet(this.shadowDom, 'https://fonts.googleapis.com/icon?family=Material+Icons');
-    this.shadowDom.innerHTML += html.replace('%relativePath%', relativePath);
+    this.shadowDom.innerHTML += pageContent;
   }
 
   initTitle() {
