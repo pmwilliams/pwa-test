@@ -73,7 +73,6 @@ main {
 .api-summary {
   border-left: none;
   width: 100%;
-  height: 100%;
   z-index: 0;
   display: none;
 }
@@ -86,7 +85,11 @@ main {
   display: none;
 }
 
-.content-pane.tab-selected,
+.show-api-summary .content-pane {
+  display: none;
+}
+
+.show-api-summary .content-pane.tab-selected,
 .show-api-summary .api-summary.tab-selected {
   display: block;
 }
@@ -143,7 +146,6 @@ main {
   .api-summary {
     border-left: 1px solid rgba(0, 0, 0, 0.12);
     width: 300px;
-    min-height: 100%;
     display: none;
   }
 }
