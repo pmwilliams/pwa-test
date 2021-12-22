@@ -192,11 +192,6 @@ h5 {
   margin-right: 0.5em;
 }
 
-#notifications .notification-more-info {
-  text-decoration: none;
-  color: var(--mdc-theme-secondary);
-}
-
 #more-info-dialog .scroller {
   max-height: 70vh;
   overflow-y: auto;

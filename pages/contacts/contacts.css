@@ -78,6 +78,10 @@
   clip-path: circle(24px at center);
 }
 
+.dark .contact-icon {
+  background-color: rgba(255, 255, 255, 0.24);
+}
+
 .contact-content {
   flex: 1;
   min-width: 0;
@@ -97,8 +101,4 @@
 
 .contact-detail--hidden {
   display: none;
-}
-
-.contact-detail__more {
-  text-decoration: none;
 }
