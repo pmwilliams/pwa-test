@@ -57,7 +57,7 @@
   flex-wrap: wrap;
   padding: 0.75em 0.75em;
   align-items: center;
-  transition: height 500ms;
+  cursor: default;
 }
 
 #contacts .contact-graphic {
@@ -101,4 +101,12 @@
 
 .contact-detail--hidden {
   display: none;
+}
+
+#dialog-title {
+  color: var(--mdc-theme-on-surface-high-emphasis);
+}
+
+#dialog-content {
+  color: var(--mdc-theme-on-surface-medium-emphasis);
 }

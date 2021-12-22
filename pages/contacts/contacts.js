@@ -113,6 +113,7 @@ const showMoreInfoDialog = (event) => {
   const contact = contacts.find((item) => `${item.id}` === id);
   [dialogElement.querySelector('#dialog-title').textContent] = contact.name;
   const contentElement = dialogElement.querySelector('#dialog-content');
+  contentElement.textContent = '';
   createLabels(
     contentElement,
     contact.address.map((value) => value.addressLine)

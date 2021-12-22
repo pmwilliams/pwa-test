@@ -68,12 +68,7 @@ h5 {
   align-items: center;
   height: 75px;
   overflow: hidden;
-  transition: height 500ms;
   cursor: default;
-}
-
-#notifications li.expanded {
-  transition: height 500ms;
 }
 
 #notifications .item-icon {
