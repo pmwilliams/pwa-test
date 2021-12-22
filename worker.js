@@ -1,7 +1,7 @@
 /* global clients */
 /* eslint-disable no-restricted-globals */
 
-const cacheName = 'pwa-test-v11';
+const cacheName = 'pwa-test-v12';
 const filesToCache = [
   'index.html',
   'style.css',
