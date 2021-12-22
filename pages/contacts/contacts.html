@@ -12,13 +12,25 @@
   <template id="contact-item">
     <li tabindex="0" class="mdc-list-item">
       <span class="mdc-list-item__graphic contact-graphic">
-        <img class="contact-icon" src="../../images/icon-256.png" />
+        <img class="contact-icon" />
       </span>
       <span class="mdc-list-item__text contact-content">
-        <div class="mdc-list-item__secondary-text contact-name"></div>
-        <div class="mdc-list-item__secondary-text contact-address"></div>
-        <div class="mdc-list-item__secondary-text contact-email"></div>
-        <div class="mdc-list-item__secondary-text contact-phone"></div>
+        <span class="mdc-list-item__secondary-text contact-detail contact-name"
+          ><span class="contact-detail__label"></span>
+          <a class="contact-detail__more" href="javascript:void(0)"></a></span
+        >
+        <span class="mdc-list-item__secondary-text contact-detail contact-address"
+          ><span class="contact-detail__label"></span>
+          <a class="contact-detail__more" href="javascript:void(0)"></a></span
+        >
+        <span class="mdc-list-item__secondary-text contact-detail contact-email"
+          ><span class="contact-detail__label"></span>
+          <a class="contact-detail__more" href="javascript:void(0)"></a></span
+        >
+        <span class="mdc-list-item__secondary-text contact-detail contact-phone"
+          ><span class="contact-detail__label"></span>
+          <a class="contact-detail__more" href="javascript:void(0)"></a></span
+        >
       </span>
     </li>
   </template>
@@ -40,5 +52,26 @@
         </div>
       </div>
     </application-shell>
+    <div id="more-info-dialog" class="mdc-dialog">
+      <div class="mdc-dialog__container">
+        <div
+          class="mdc-dialog__surface"
+          role="alertdialog"
+          aria-modal="true"
+          aria-labelledby="dialog-title"
+          aria-describedby="dialog-content"
+        >
+          <div class="mdc-dialog__title" id="dialog-title"></div>
+          <div class="mdc-dialog__content" id="dialog-content"></div>
+          <div class="mdc-dialog__actions">
+            <button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="discard">
+              <div class="mdc-button__ripple"></div>
+              <span class="mdc-button__label">Close</span>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="mdc-dialog__scrim"></div>
+    </div>
   </body>
 </html>

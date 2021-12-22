@@ -79,25 +79,26 @@
 }
 
 .contact-content {
+  flex: 1;
+  min-width: 0;
   min-height: 4em;
 }
 
-.contact-name {
+.contact-name .contact-detail__label {
   font-weight: bold;
 }
 
-.contact-name,
-.contact-phone,
-.contact-address,
-.contact-email {
+.contact-detail__label {
   white-space: nowrap;
   text-overflow: ellipsis;
+  margin-right: 0.2em;
   color: var(--mdc-theme-on-surface-high-emphasis);
 }
 
-.contact-name:empty,
-.contact-phone:empty,
-.contact-address:empty,
-.contact-email:empty {
+.contact-detail--hidden {
   display: none;
+}
+
+.contact-detail__more {
+  text-decoration: none;
 }
