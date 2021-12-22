@@ -38,8 +38,10 @@ const drawContacts = () => {
       updateContactDetail(clone, contact.id, contact.address, '.contact-address', (items) => items[0].addressLine);
       updateContactDetail(clone, contact.id, contact.tel, '.contact-phone', (items) => items[0]);
       updateContactDetail(clone, contact.id, contact.email, '.contact-email', (items) => items[0]);
-      const iconURL = URL.createObjectURL(contact.icon);
-      clone.querySelector('.contact-icon').src = iconURL;
+      if (contact.icon.length) {
+        const iconURL = URL.createObjectURL(contact.icon[0]);
+        clone.querySelector('.contact-icon').src = iconURL;
+      }
       list.insertBefore(clone, list.firstChild);
     });
   const items = list.querySelectorAll('li');
@@ -68,21 +70,21 @@ const onFabClick = async () => {
         email: ['bob@bob.com', 'bill@bill.com', 'harry@hotmail.com'],
         name: ['Bob Smith', 'Bill Jones', 'Harry Bottomley'],
         tel: ['3242 2342 32424'],
-        icon: blob,
+        icon: [blob],
       },
       {
         address: [],
         email: [],
         name: ['Steve'],
         tel: ['234 232 3232', '3434 3434 432', '323 4343 2342'],
-        icon: blob,
+        icon: [],
       },
       {
         address: [{ addressLine: '10 sesame street, New York, USA' }, { addressLine: '56 high street, London, UK' }],
         email: ['bill@bob.com'],
         name: ['Harry'],
         tel: ['444 879 4456', '222 323 4342', '455 232 3232'],
-        icon: blob,
+        icon: [blob],
       },
     ]);
     drawContacts();
