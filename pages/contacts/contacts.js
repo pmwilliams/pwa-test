@@ -29,6 +29,7 @@ const updateContactDetail = (parent, id, values, selector, accessor) => {
 
 const drawContacts = () => {
   const list = document.querySelector('#contacts ul');
+  list.innerHTML = '';
   Object.values(contacts)
     .slice(0, MAX_VISIBLE_CONTACTS)
     .forEach((contact) => {
@@ -60,39 +61,9 @@ const updateContacts = (newContacts) => {
 };
 
 const onFabClick = async () => {
-  if (!navigator.contacts) {
-    const response = await fetch(new Request('../../images/icon-256.png'));
-    const blob = await response.blob();
-
-    updateContacts([
-      {
-        address: [{ addressLine: '15 acacia avenue' }],
-        email: ['bob@bob.com', 'bill@bill.com', 'harry@hotmail.com'],
-        name: ['Bob Smith', 'Bill Jones', 'Harry Bottomley'],
-        tel: ['3242 2342 32424'],
-        icon: [blob],
-      },
-      {
-        address: [],
-        email: [],
-        name: ['Steve'],
-        tel: ['234 232 3232', '3434 3434 432', '323 4343 2342'],
-        icon: [],
-      },
-      {
-        address: [{ addressLine: '10 sesame street, New York, USA' }, { addressLine: '56 high street, London, UK' }],
-        email: ['bill@bob.com'],
-        name: ['Harry'],
-        tel: ['444 879 4456', '222 323 4342', '455 232 3232'],
-        icon: [blob],
-      },
-    ]);
-    drawContacts();
-  } else {
-    const selected = await navigator.contacts.select(await getSupportedProperties(), opts);
-    updateContacts(selected);
-    drawContacts();
-  }
+  const selected = await navigator.contacts.select(await getSupportedProperties(), opts);
+  updateContacts(selected);
+  drawContacts();
 };
 
 const createLabels = (parent, values) => {
@@ -157,4 +128,47 @@ const getApi = async () => {
 
 getApi().then((api) => {
   app.apiSummary = api;
+  if (!isContactsManagerSupported()) {
+    app.enableStub = true;
+  }
+});
+
+app.addEventListener('stubChange', (event) => {
+  if (event.detail.stub) {
+    navigator.contacts = {
+      getProperties: () => [],
+      select: async () => {
+        const response = await fetch(new Request('../../images/icon-256.png'));
+        const blob = await response.blob();
+        return Promise.resolve([
+          {
+            address: [{ addressLine: '15 acacia avenue' }],
+            email: ['bob@bob.com', 'bill@bill.com', 'harry@hotmail.com'],
+            name: ['Bob Smith', 'Bill Jones', 'Harry Bottomley'],
+            tel: ['3242 2342 32424'],
+            icon: [blob],
+          },
+          {
+            address: [],
+            email: [],
+            name: ['Steve'],
+            tel: ['234 232 3232', '3434 3434 432', '323 4343 2342'],
+            icon: [],
+          },
+          {
+            address: [
+              { addressLine: '10 sesame street, New York, USA' },
+              { addressLine: '56 high street, London, UK' },
+            ],
+            email: ['bill@bob.com'],
+            name: ['Harry'],
+            tel: ['444 879 4456', '222 323 4342', '455 232 3232'],
+            icon: [blob],
+          },
+        ]);
+      },
+    };
+  } else {
+    navigator.contacts = undefined;
+  }
 });

@@ -6,6 +6,7 @@ export const { MDCTextField } = window.mdc.textField;
 export const { MDCRipple } = window.mdc.ripple;
 export const { MDCList } = window.mdc.list;
 export const { MDCDialog } = window.mdc.dialog;
+export const { MDCSwitch } = window.mdc.switchControl;
 
 const registerAndInit = () => {
   window.mdc.autoInit.register('MDCCheckbox', MDCCheckbox);

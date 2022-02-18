@@ -118,6 +118,20 @@ const pageContent = html`
           <slot><p>No page content<p></slot>
         </div>
         <aside class="api-summary">
+          <div class="make-it-work">
+            <button class="mdc-switch mdc-switch--unselected" type="button" role="switch" aria-checked="false" disabled>
+              <div class="mdc-switch__track"></div>
+              <div class="mdc-switch__handle-track">
+                <div class="mdc-switch__handle">
+                  <div class="mdc-switch__shadow">
+                    <div class="mdc-elevation-overlay"></div>
+                  </div>
+                  <div class="mdc-switch__ripple"></div>
+                </div>
+              </div>
+            </button>
+            <label for="basic-switch">Make it work</label>
+          </div>
           <ul id="api-summary-list" class="mdc-list">
         </aside>
       </div>
@@ -130,6 +144,7 @@ class ApplicationShell extends HTMLElement {
     super();
     this.shadowDom = this.attachShadow({ mode: 'open' });
     this._apiSummary = [];
+    this._enableStub = false;
     this._alerts = [];
   }
 
@@ -140,6 +155,15 @@ class ApplicationShell extends HTMLElement {
 
   get apiSummary() {
     return this._apiSummary;
+  }
+
+  set enableStub(enable) {
+    this._enableStub = Boolean(enable);
+    this.updateApiSummary();
+  }
+
+  get enableStub() {
+    return this._enableStub;
   }
 
   alert(message) {
@@ -357,6 +381,18 @@ class ApplicationShell extends HTMLElement {
   }
 
   updateApiSummary() {
+    const switchElement = this.shadowDom.querySelector('.mdc-switch');
+    const switchControl = new window.mdc.switchControl.MDCSwitch(switchElement);
+    switchElement.addEventListener('click', () => {
+      this.dispatchEvent(
+        new CustomEvent('stubChange', {
+          detail: { stub: switchControl.selected },
+          composed: true,
+        })
+      );
+    });
+    switchElement.disabled = !this.enableStub;
+
     const listElement = this.shadowDom.querySelector('#api-summary-list');
     listElement.innerHTML = '';
     if (this.apiSummary.length) {

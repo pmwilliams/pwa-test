@@ -33,6 +33,17 @@ body.dark {
   --mdc-theme-error: #cf6679;
   --mdc-theme-primary-medium-emphasis: rgba(187, 134, 252, 0.08);
   --mdc-checkbox-unchecked-color: var(--mdc-theme-on-surface-medium-emphasis);
+  --mdc-switch-unselected-handle-color: white;
+  --mdc-switch-unselected-hover-handle-color: white;
+  --mdc-switch-unselected-focus-handle-color: white;
+  --mdc-switch-unselected-pressed-handle-color: white;
+  --mdc-switch-disabled-unselected-handle-color: rgba(255, 255, 255, 0.6);
+  --mdc-switch-selected-hover-handle-color: var(--mdc-theme-primary);
+  --mdc-switch-selected-pressed-handle-color: var(--mdc-theme-primary);
+  --mdc-switch-selected-focus-handle-color: var(--mdc-theme-primary);
+  --mdc-switch-unselected-pressed-state-layer-color: rgba(255, 255, 255, 0.87);
+  --mdc-switch-unselected-focus-state-layer-color: rgba(255, 255, 255, 0.87);
+  --mdc-switch-disabled-track-opacity: 0.6;
 }
 
 .dark * {

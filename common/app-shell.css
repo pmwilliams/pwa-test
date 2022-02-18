@@ -98,6 +98,19 @@ main {
   background-color: unset;
 }
 
+.api-summary .make-it-work {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.9rem;
+  display: flex;
+  margin: 16px 16px 0 16px;
+  align-items: center;
+  gap: 1rem;
+}
+
+.api-summary .make-it-work button:disabled + label {
+  opacity: 0.78;
+}
+
 .api-summary li {
   display: flex;
 }
