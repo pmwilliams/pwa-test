@@ -44,8 +44,8 @@ main {
 
 .content-scroller {
   position: relative;
-  height: 100%;
   overflow-y: auto;
+  flex: 1;
 }
 
 .content-container {
@@ -75,10 +75,6 @@ main {
   width: 100%;
   z-index: 0;
   display: none;
-}
-
-:host(.dark) .api-summary {
-  background-color: rgba(255, 255, 255, 0.07);
 }
 
 .show-api-summary .api-summary {
@@ -152,7 +148,7 @@ main {
   .show-api-summary .mdc-tab-bar {
     display: none;
   }
-  .content-pane,
+  .show-api-summary .content-pane,
   .show-api-summary .api-summary {
     display: block;
   }
@@ -160,6 +156,10 @@ main {
     border-left: 1px solid rgba(0, 0, 0, 0.12);
     width: 300px;
     display: none;
+  }
+  :host(.dark) .show-api-summary .api-summary,
+  :host(.dark) .show-api-summary .api-summary.tab-selected {
+    background-color: rgba(255, 255, 255, 0.07);
   }
 }
 
