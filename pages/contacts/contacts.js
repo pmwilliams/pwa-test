@@ -126,25 +126,31 @@ const getApi = async () => {
   ];
 };
 
-getApi().then((api) => {
-  app.apiSummary = api;
-  if (!isContactsManagerSupported()) {
-    app.enableStub = true;
-  }
-});
+const updateApi = () => {
+  getApi().then((api) => {
+    app.apiSummary = api;
+  });
+};
+
+if (!isContactsManagerSupported()) {
+  app.enableStub = true;
+}
+
+updateApi();
 
 app.addEventListener('stubChange', (event) => {
   if (event.detail.stub) {
+    window.ContactsManager = () => {};
     navigator.contacts = {
-      getProperties: () => [],
+      getProperties: async () => Promise.resolve(['name', 'email', 'tel', 'address', 'email', 'icon']),
       select: async () => {
         const response = await fetch(new Request('../../images/icon-256.png'));
         const blob = await response.blob();
         return Promise.resolve([
           {
             address: [{ addressLine: '15 acacia avenue' }],
-            email: ['bob@bob.com', 'bill@bill.com', 'harry@hotmail.com'],
-            name: ['Bob Smith', 'Bill Jones', 'Harry Bottomley'],
+            email: ['bill.smith@supermail.com', 'bill.smith@fancymail.com', 'bills@mailmailmail.com'],
+            name: ['Bill Smith', 'El Billster', 'Bill the guy'],
             tel: ['3242 2342 32424'],
             icon: [blob],
           },
@@ -160,8 +166,8 @@ app.addEventListener('stubChange', (event) => {
               { addressLine: '10 sesame street, New York, USA' },
               { addressLine: '56 high street, London, UK' },
             ],
-            email: ['bill@bob.com'],
-            name: ['Harry'],
+            email: ['sarah.plank@email.com'],
+            name: ['Sarah'],
             tel: ['444 879 4456', '222 323 4342', '455 232 3232'],
             icon: [blob],
           },
@@ -169,6 +175,8 @@ app.addEventListener('stubChange', (event) => {
       },
     };
   } else {
+    window.ContactsManager = undefined;
     navigator.contacts = undefined;
   }
+  updateApi();
 });
