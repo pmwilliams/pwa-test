@@ -2,11 +2,15 @@
 @import url('common/app-shell.css');
 @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 
+html {
+  height: 100%;
+}
+
 body {
   background: var(--mdc-theme-background);
   color: var(--mdc-theme-on-background);
   display: flex;
-  height: 100vh;
+  height: 100%;
   margin: 0;
   overflow: hidden;
   --mdc-theme-primary-medium-emphasis: rgba(98, 0, 238, 0.08);
