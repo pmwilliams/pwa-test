@@ -1,10 +1,10 @@
 const title = 'Web API Explorer';
 
 const routes = [
-  { name: 'Home', path: 'index.html', icon: 'home' },
-  { name: 'Notifications', path: 'pages/notifications/notifications.html', icon: 'notifications' },
-  { name: 'Contacts', path: 'pages/contacts/contacts.html', icon: 'contacts' },
-  { name: 'Share', path: 'pages/share/share.html', icon: 'share' },
+  { name: 'Home', path: 'index', icon: 'home' },
+  { name: 'Notifications', path: 'pages/notifications/notifications', icon: 'notifications' },
+  { name: 'Contacts', path: 'pages/contacts/contacts', icon: 'contacts' },
+  { name: 'Share', path: 'pages/share/share', icon: 'share' },
 ];
 
 const addLink = (parent, rel, href) => {
