@@ -46,7 +46,6 @@ const onScanClick = () => {
             video.play();
             window.requestAnimationFrame(() => {
               detect();
-              draw();
             });
           };
         });
