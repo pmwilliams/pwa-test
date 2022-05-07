@@ -18,7 +18,6 @@ const onScanClick = () => {
     ctx.lineWidth = '1';
     ctx.strokeStyle = 'red';
     ctx.stroke();
-    window.requestAnimationFrame(draw);
   };
 
   const detect = () => {
