@@ -28,7 +28,7 @@ const updateContactDetail = (parent, id, values, selector, accessor) => {
 };
 
 const drawContacts = () => {
-  const list = document.querySelector('#contacts ul');
+  const list = document.querySelector('.contacts ul');
   list.innerHTML = '';
   Object.values(contacts)
     .slice(0, MAX_VISIBLE_CONTACTS)
@@ -79,11 +79,11 @@ const showMoreInfoDialog = (event) => {
     return;
   }
   const id = event.target.getAttribute('data-id');
-  const dialogElement = document.querySelector('#more-info-dialog');
+  const dialogElement = document.querySelector('.more-info-dialog');
   const dialog = new MDCDialog(dialogElement);
   const contact = contacts.find((item) => `${item.id}` === id);
-  [dialogElement.querySelector('#dialog-title').textContent] = contact.name;
-  const contentElement = dialogElement.querySelector('#dialog-content');
+  [dialogElement.querySelector('.more-info-dialog__title').textContent] = contact.name;
+  const contentElement = dialogElement.querySelector('.more-info-dialog__content');
   contentElement.textContent = '';
   createLabels(
     contentElement,
@@ -94,8 +94,8 @@ const showMoreInfoDialog = (event) => {
   dialog.open();
 };
 
-document.querySelector('#add-contacts-fab').addEventListener('click', onFabClick);
-document.querySelector('#contacts').addEventListener('click', showMoreInfoDialog);
+document.querySelector('.add-contacts-fab').addEventListener('click', onFabClick);
+document.querySelector('.contacts').addEventListener('click', showMoreInfoDialog);
 
 const app = document.querySelector('application-shell');
 

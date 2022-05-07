@@ -5,6 +5,7 @@ const routes = [
   { name: 'Notifications', path: 'pages/notifications/notifications', icon: 'notifications' },
   { name: 'Contacts', path: 'pages/contacts/contacts', icon: 'contacts' },
   { name: 'Share', path: 'pages/share/share', icon: 'share' },
+  { name: 'Barcode', path: 'pages/barcode/barcode', icon: 'qr_code_2' },
 ];
 
 const addLink = (parent, rel, href) => {
@@ -183,6 +184,9 @@ class ApplicationShell extends HTMLElement {
     this.initNav();
     this.initDrawer();
     this.initApiSummary();
+
+    window.addEventListener('error', (error) => this.alert(`Error: ${error.message}`));
+    window.addEventListener('unhandledrejection', (error) => this.alert(`Promise rejection: ${error.reason}`));
 
     window.addEventListener('load', () => {
       this.attachDrawer();

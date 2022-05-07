@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../style.css" />
+    <link rel="stylesheet" href="barcode.css" />
+    <script src="../../common/app-shell.js"></script>
+    <script defer src="https://unpkg.com/material-components-web@13.0.0/dist/material-components-web.min.js"></script>
+    <script src="barcode.js" type="module"></script>
+  </head>
+  <body class="mdc-typography">
+    <application-shell path="../../" page-title="Share" api-summary>
+      <div class="content">
+        <div class="barcode">
+          <div class="barcode__content">
+            <div class="not-scanning">
+              <i class="material-icons">qr_code_2</i>
+              <button
+                class="scan mdc-button mdc-button--raised mdc-button--leading"
+                data-mdc-auto-init="MDCRipple"
+              >
+                <span class="mdc-button__ripple"></span>
+                <i class="material-icons mdc-button__icon" aria-hidden="true">qr_code_scanner</i>
+                <span class="mdc-button__label">Scan</span>
+              </button>
+              <video class="video" autoplay="true">
+              </video>
+            </div>
+          </div>
+        </div>
+      </div>
+    </application-shell>
+  </body>
+</html>

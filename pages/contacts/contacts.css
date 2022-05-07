@@ -1,9 +1,9 @@
-#contacts {
+.contacts {
   position: relative;
   width: 100%;
 }
 
-#contacts .no-contacts {
+.contacts .no-contacts {
   opacity: 0;
   position: absolute;
   top: 48px;
@@ -17,21 +17,21 @@
   z-index: -1;
 }
 
-#contacts ul {
+.contacts ul {
   opacity: 1;
   transition: opacity 250ms 250ms;
   z-index: 1;
 }
 
-#contacts ul:empty {
+.contacts ul:empty {
   opacity: 0;
 }
 
-#contacts ul:empty ~ .no-contacts {
+.contacts ul:empty ~ .no-contacts {
   opacity: 1;
 }
 
-#contacts .no-contacts i {
+.contacts .no-contacts i {
   height: 100%;
   text-align: center;
   color: var(--mdc-theme-primary);
@@ -39,28 +39,28 @@
   font-size: min(calc(100vh - 448px), 252px);
 }
 
-.dark #contacts .no-contacts i {
+.dark .contacts .no-contacts i {
   opacity: 1;
 }
 
-#contacts .no-contacts h3 {
+.contacts .no-contacts h3 {
   font-weight: normal;
   margin: 24px 0 12px;
 }
 
-#contacts .no-contacts .tagline {
+.contacts .no-contacts .tagline {
   max-width: 250px;
   text-align: center;
 }
 
-#contacts li {
+.contacts li {
   flex-wrap: wrap;
   padding: 0.75em 0.75em;
   align-items: center;
   cursor: default;
 }
 
-#contacts .contact-graphic {
+.contacts .contact-graphic {
   margin-right: 12px;
 }
 
@@ -103,10 +103,10 @@
   display: none;
 }
 
-#dialog-title {
+.more-info-dialog .more-info-dialog__title {
   color: var(--mdc-theme-on-surface-high-emphasis);
 }
 
-#dialog-content {
+.more-info-dialog .more-info-dialog__content {
   color: var(--mdc-theme-on-surface-medium-emphasis);
 }

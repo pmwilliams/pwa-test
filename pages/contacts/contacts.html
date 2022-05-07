@@ -40,11 +40,11 @@
   <body class="mdc-typography">
     <application-shell path="../../" page-title="Contacts" api-summary>
       <div class="content">
-        <button id="add-contacts-fab" class="fab mdc-fab" aria-label="Add contacts" data-mdc-auto-init="MDCRipple">
+        <button class="add-contacts-fab fab mdc-fab" aria-label="Add contacts" data-mdc-auto-init="MDCRipple">
           <div class="mdc-fab__ripple"></div>
           <span class="mdc-fab__icon material-icons">person_add_alt</span>
         </button>
-        <div id="contacts">
+        <div class="contacts">
           <ul class="mdc-list mdc-list--two-line" data-mdc-auto-init="MDCList"></ul>
           <div class="no-contacts">
             <i class="material-icons"> contacts </i>
@@ -54,17 +54,17 @@
         </div>
       </div>
     </application-shell>
-    <div id="more-info-dialog" class="mdc-dialog">
+    <div class="more-info-dialog mdc-dialog">
       <div class="mdc-dialog__container">
         <div
           class="mdc-dialog__surface"
           role="alertdialog"
           aria-modal="true"
-          aria-labelledby="dialog-title"
-          aria-describedby="dialog-content"
+          aria-labelledby="more-info-dialog__title"
+          aria-describedby="more-info-dialog__content"
         >
-          <div class="mdc-dialog__title" id="dialog-title"></div>
-          <div class="mdc-dialog__content" id="dialog-content"></div>
+          <div class="more-info-dialog__title mdc-dialog__title"></div>
+          <div class="more-info-dialog__content mdc-dialog__content"></div>
           <div class="mdc-dialog__actions">
             <button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="discard">
               <div class="mdc-button__ripple"></div>

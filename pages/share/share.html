@@ -11,23 +11,35 @@
   <body class="mdc-typography">
     <application-shell path="../../" page-title="Share" api-summary>
       <div class="content">
-        <div id="share">
-          <div class="no-share">
-            <i class="material-icons">share</i>
-            <img id="file-display" />
-            <label for="file-selector" class="mdc-button file-selector-label">
-              Select a photo
-            </label>
-            <input id="file-selector" type="file" accept="image/*">
-            <button
-              id="share-button"
-              class="mdc-button mdc-button--raised mdc-button--leading"
-              data-mdc-auto-init="MDCRipple"
-            >
-              <span class="mdc-button__ripple"></span>
-              <i class="material-icons mdc-button__icon" aria-hidden="true">share</i>
-              <span class="mdc-button__label">Share</span>
-            </button>
+        <div class="share">
+          <div class="share__content">
+            <div class="select-image">
+              <i class="material-icons">share</i>
+              <label for="file-selector" class="mdc-button file-selector-label">
+                Select a photo
+              </label>
+              <input id="file-selector" type="file" accept="image/*">
+            </div>
+            <div class="share-image">
+              <img class="share-image__display" >
+              <div class="share-buttons">
+                <button
+                  class="share-buttons__cancel mdc-button mdc-button mdc-button--leading"
+                  data-mdc-auto-init="MDCRipple"
+                >
+                  <span class="mdc-button__ripple"></span>
+                  <span class="mdc-button__label">Cancel</span>
+                </button>
+                <button
+                  class="share-buttons__share mdc-button mdc-button--raised mdc-button--leading"
+                  data-mdc-auto-init="MDCRipple"
+                >
+                  <span class="mdc-button__ripple"></span>
+                  <i class="material-icons mdc-button__icon" aria-hidden="true">share</i>
+                  <span class="mdc-button__label">Share</span>
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>

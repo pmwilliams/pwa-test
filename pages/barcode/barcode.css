@@ -1,0 +1,42 @@
+.barcode {
+  position: relative;
+  width: 100%;
+}
+
+.barcode .barcode__content {
+  position: absolute;
+  top: 48px;
+  width: 100%;
+  transition: opacity 250ms;
+  display: flex;
+  padding-top: 12px;
+  flex-direction: column;
+  align-items: center;
+  vertical-align: middle;
+}
+
+.dark .barcode .barcode__content i {
+  opacity: 1;
+}
+
+.not-scanning {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.not-scanning > i {
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  color: var(--mdc-theme-primary);
+  opacity: 0.2;
+  font-size: min(calc(100vh - 448px), 252px);
+  display: block;
+}
+
+.video {
+  max-width: 100%;
+  max-height: 100%;
+}
