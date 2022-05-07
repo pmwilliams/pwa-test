@@ -13,6 +13,7 @@ const onScanClick = () => {
   const draw = (boundingBox) => {
     const xRatio = video.clientWidth / video.videoWidth;
     const yRatio = video.clientHeight / video.videoHeight;
+    ctx.beginPath();
     ctx.rect(boundingBox.x * xRatio, boundingBox.y * yRatio, boundingBox.width * xRatio, boundingBox.height * yRatio);
     ctx.lineWidth = '1';
     ctx.strokeStyle = 'red';
