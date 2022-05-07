@@ -11,13 +11,9 @@ const onScanClick = () => {
   const barcodeDetector = new window.BarcodeDetector({ formats: ['ean_13'] });
 
   const draw = (boundingBox) => {
-    const videoBoundingBox = video.getBoundingClientRect();
-    ctx.rect(
-      boundingBox.x - videoBoundingBox.x,
-      boundingBox.y - videoBoundingBox.y,
-      boundingBox.width,
-      boundingBox.height
-    );
+    const xRatio = video.clientWidth / video.videoWidth;
+    const yRatio = video.clientHeight / video.videoHeight;
+    ctx.rect(boundingBox.x * xRatio, boundingBox.y * yRatio, boundingBox.width * xRatio, boundingBox.height * yRatio);
     ctx.lineWidth = '1';
     ctx.strokeStyle = 'red';
     ctx.stroke();
@@ -26,7 +22,7 @@ const onScanClick = () => {
 
   const detect = () => {
     barcodeDetector.detect(video).then((barcodes) => {
-      ctx.clearRect(0, 0, canvas.clientWidth, canvas.canvasHeight);
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
       barcodes.forEach((barcode) => {
         app.alert(`Barcode found: ${barcode.rawValue}`);
         draw(barcode.boundingBox);
