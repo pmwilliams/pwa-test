@@ -11,7 +11,7 @@ const onScanClick = () => {
   const barcodeDetector = new window.BarcodeDetector({ formats: ['ean_13'] });
 
   const draw = (boundingBox) => {
-    ctx.rect(boundingBox.x, boundingBox.y, boundingBox.width, boundingBox.y);
+    ctx.rect(boundingBox.x, boundingBox.y, boundingBox.width, boundingBox.height);
     ctx.lineWidth = '1';
     ctx.strokeStyle = 'red';
     ctx.stroke();
