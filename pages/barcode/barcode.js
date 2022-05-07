@@ -10,7 +10,7 @@ const onScanClick = () => {
 
   const detect = () => {
     barcodeDetector.detect(video).then((barcodes) => {
-      barcodes.forEach((barcode) => app.alert(`Barcode found: ${barcode.rawData}`));
+      barcodes.forEach((barcode) => app.alert(`Barcode found: ${barcode.rawValue}`));
       window.requestAnimationFrame(detect);
     });
   };
