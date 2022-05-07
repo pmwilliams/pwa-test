@@ -23,7 +23,7 @@ const onScanClick = () => {
         .getUserMedia({
           audio: false,
           video: {
-            facingMode: 'user',
+            facingMode: 'environment',
           },
         })
         .then((stream) => {
